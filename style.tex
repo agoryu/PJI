@@ -1,0 +1,35 @@
+
+
+\pagestyle{fancy}
+
+%%%% Style des sections %%%%
+%\titleformat{\section}
+\titlespacing{\section}{0em}{0em}{1em}
+
+%%%% Style des subsections %%%%
+\titleformat{\subsection}
+{\large\bfseries}
+{\thesubsection}{1em}{}
+\titlespacing{\subsection}{1.5em}{1em}{1em}
+
+%%%% Style des subsubsections %%%%
+\titleformat{\subsubsection}
+{\normalfont}
+{\thesubsubsection}{1em}{}
+\titlespacing{\subsubsection}{2.5em}{1em}{0.3em}
+
+%%%% Entête %%%%
+\fancyhead{}
+% \fancyhead[R]{\colorbox{ivi}{
+%    \begin{minipage}{0.1\textwidth}
+%       \textcolor{white}{\LARGE{PJE}}
+%    \end{minipage}%
+% }}
+\fancyhead[R]{{\Large{PJI}}}
+\lhead{\raisebox{17px}{\leftmark}} % Le titre de la partie courante
+
+%%%% Pied de page %%%%%
+%\fancyfoot{}
+\lfoot{\includegraphics[height=30px]{image/logoLILLE1.jpg}}
+\rfoot{\includegraphics[height=30px]{image/logoFOX.png}}
+%\rfoot{\raisebox{13px}{{\thepage} /\ \pageref{LastPage}}}

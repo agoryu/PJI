@@ -1,25 +1,49 @@
 \section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
+
 Durant nos études de master informatique à l'université de Lille 1, nous avons l'occasion de participer à un projet
-dans une équipe de recherche. Cette expérience à pour but de nous faire découvrir le milieu de la recherche en travaillant
-sur une application qui sera utile à l'équipe. Nous avons travaillé avec l'équipe FOX actuellement sur des projets
-concernant l'analyse du mouvement à partir de flux vidéo.\\
+dans une équipe de recherche. Cette expérience à pour but de nous faire découvrir le milieu de la recherche.\\
 
-Nous avons eu pour mission d'améliorer un système de recherche des yeux dans une image qui a été développé 
-par d'ancien étudiant de l'université. Pour cela, nous avons effectué des recherches afin de trouver des 
-algorithmes permettant d'optimiser ce suivi des yeux, puis nous avons implémenté notre solution.
-Les résultats de nos travaux permettront d'améliorer la détection d'émotions qui est l'objectif principale 
-de l'applicaiton.\\
+Le but du projet est d'améliorer la détection des yeux dans une application qui permet de faire de la reconnaissance
+d'émotion au travers des interprétations des mouvements du visage. Ce type d'application peut être utilisé pour 
+connaître l'intérêt d'une personne pour une publicité ou encore pour une émission de télévision. Ce genre d'outils
+existe déjà mais dans de nombreux cas il utilise des appareils assez intrusif pour l'étude des yeux.\\ 
 
-Pour mener à bien ce projet, nous avons du répondre au problèmatique suivante :
-\begin{itemize}
- \item Quel est la solution actuellement présente dans l'application ?
- \item Quels sont les points faible de la solution existante ?
- \item Avec quel algorithmes peut-on remédier à ces faiblesses ?
- \item Comment et où implémenter notre solution ?
-\end{itemize}
+Durant ce projet, nous avons travaillé avec l'équipe FOX qui étudie l'analyse du mouvement à partir d'un flux vidéo.
+Leur travaux sont divisé en quatre grand domaine : le regard, qui est la partie sur laquel nous avons travaillé, l'événement, 
+l'émotion et la reconnaissance de personne. La grande majorité de leur travaux sont des applications temps réel, ce qui
+permet d'avoir un niveau de réactivité très élevé. Le projet sur lequel nous avons travaillé est basé sur les travaux
+d'anciens étudiants qui se sont concentré sur la détection de visage. A partir de ces travaux, il nous a fallu détecter
+les yeux dans le visage. Le projet est une application temps réel, nous avons donc travaillé avec une simple webcam pour 
+tester nos algorithmes.\\
 
-\ \\
-Pour cela nous allons d'abord détailler la structure de la solution existante. Puis nous allons 
-décrire l'ensemble des procédés que nous avons testé dans l'application. Et enfin, nous allons
-décrire et justifier la solution que nous avons implémenter dans l'application.
+La détection des yeux a été implémenté dans l'application, cependant, elle n'est pas optimum et la ROI\footnote{Region Of Interest}
+qui entoure les yeux peut parfois subir un léger décalage qui peut fausser les résultats de l'application. Pour corriger ce défaut,
+nous avons cherché à différencier les yeux du reste du visage et essayer de trouver un point fixe pour permettre de centrer la ROI.
+Ensuite, l'objectif est de recentrer la ROI du visage avec les informations que nous avons récupéré pour la stabilisé également.
+Une fois, que ces régions seront stabilisé, le reste de l'application normalisera le visage et cela permettra d'avoir beaucoup moins
+de bruit lors de la reconnaissance d'émotion.
+
+%en travaillant
+% sur une application qui sera utile à l'équipe. Nous avons travaillé avec l'équipe FOX actuellement sur des projets
+% concernant l'analyse du mouvement à partir de flux vidéo.\\
+% 
+% Nous avons eu pour mission d'améliorer un système de recherche des yeux dans une image qui a été développé 
+% par d'ancien étudiant de l'université. Pour cela, nous avons effectué des recherches afin de trouver des 
+% algorithmes permettant d'optimiser ce suivi des yeux, puis nous avons implémenté notre solution.
+% Les résultats de nos travaux permettront d'améliorer la détection d'émotions qui est l'objectif principale 
+% de l'applicaiton.\\
+% 
+% Pour mener à bien ce projet, nous avons du répondre au problèmatique suivante :
+% \begin{itemize}
+%  \item Quel est la solution actuellement présente dans l'application ?
+%  \item Quels sont les points faible de la solution existante ?
+%  \item Avec quel algorithmes peut-on remédier à ces faiblesses ?
+%  \item Comment et où implémenter notre solution ?
+% \end{itemize}
+% 
+% \ \\
+% Pour cela nous allons d'abord détailler la structure de la solution existante. Puis nous allons 
+% décrire l'ensemble des procédés que nous avons testé dans l'application. Et enfin, nous allons
+% décrire et justifier la solution que nous avons implémenter dans l'application.
 \newpage
