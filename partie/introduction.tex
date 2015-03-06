@@ -1,28 +1,50 @@
 \section*{Introduction}
 \addcontentsline{toc}{section}{Introduction}
 
-Durant nos études de master informatique à l'université de Lille 1, nous avons l'occasion de participer à un projet
-dans une équipe de recherche. Cette expérience à pour but de nous faire découvrir le milieu de la recherche.\\
+% Préambule
+Durant nos études de master informatique à l'université de Lille 1,
+nous avons l'occasion de participer à un projet proposé par une équipe de
+recherche. Cette expérience à pour but de nous faire découvrir le
+milieu de la recherche.\\
 
-Le but du projet est d'améliorer la détection des yeux dans une application qui permet de faire de la reconnaissance
-d'émotion au travers des interprétations des mouvements du visage. Ce type d'application peut être utilisé pour 
-connaître l'intérêt d'une personne pour une publicité ou encore pour une émission de télévision. Ce genre d'outils
-existe déjà mais dans de nombreux cas il utilise des appareils assez intrusif pour l'étude des yeux.\\ 
+% Introduction
+Le but du projet est de rendre plus stable la détection des yeux dans une
+application qui permet de faire de la reconnaissance d'émotion à
+travers l'interprétation des movements et des expressions du visage. Ce type
+d'application peut être utilisé pour connaître l'intérêt d'une
+personne pour une publicité ou encore connaître l'attention d'un étudiant 
+dans le cadre du e-learning. Ce genre d'outils existe déjà mais dans de nombreux cas il
+utilise des appareils assez intrusif pour l'étude des yeux.\\
 
-Durant ce projet, nous avons travaillé avec l'équipe FOX qui étudie l'analyse du mouvement à partir d'un flux vidéo.
-Leur travaux sont divisé en quatre grand domaine : le regard, qui est la partie sur laquel nous avons travaillé, l'événement, 
-l'émotion et la reconnaissance de personne. La grande majorité de leur travaux sont des applications temps réel, ce qui
-permet d'avoir un niveau de réactivité très élevé. Le projet sur lequel nous avons travaillé est basé sur les travaux
-d'anciens étudiants qui se sont concentré sur la détection de visage. A partir de ces travaux, il nous a fallu détecter
-les yeux dans le visage. Le projet est une application temps réel, nous avons donc travaillé avec une simple webcam pour 
-tester nos algorithmes.\\
+% Context
+Pour la réalisation de ce projet, nous travaillons avec l'équipe FOX qui étudie
+l'analyse du mouvement à partir de vidéos. Plus précisément, leurs recherches portent
+sur l'extraction du comportement humain depuis les flux vidéo.  Leurs travaux sont
+divisés en quatre grands domaines : le regard, qui est la partie sur
+laquelle nous travaillons, l'événement, l'émotion et la
+reconnaissance de personne. La grande majorité de leur travaux sont
+des applications temps réel, ce qui permet d'avoir un niveau de
+réactivité très élevé. Le projet sur lequel nous avons travaillé est
+basé sur les travaux d'anciens étudiants qui se sont concentré sur la
+détection de visage et des yeux afin d'extraire les émotions d'un personne. 
+Le projet est une application temps réel, dont les flux vidéo peuvent 
+provenir de vidéos enregistrées ou d'une caméra type webcam.\\
 
-La détection des yeux a été implémenté dans l'application, cependant, elle n'est pas optimum et la ROI\footnote{Region Of Interest}
-qui entoure les yeux peut parfois subir un léger décalage qui peut fausser les résultats de l'application. Pour corriger ce défaut,
-nous avons cherché à différencier les yeux du reste du visage et essayer de trouver un point fixe pour permettre de centrer la ROI.
-Ensuite, l'objectif est de recentrer la ROI du visage avec les informations que nous avons récupéré pour la stabilisé également.
-Une fois, que ces régions seront stabilisé, le reste de l'application normalisera le visage et cela permettra d'avoir beaucoup moins
-de bruit lors de la reconnaissance d'émotion.
+% Problème
+Au début du projet, la détection des yeux été implémenté, cependant,
+la méthode de détection est encore approximative et la ROI\footnote{Region Of Interest} qui
+encadre les yeux peut parfois subir un léger décalage, surtout lorsque 
+la personne ferme les yeux. Le problème étant que les algorithmes de reconnaissance 
+d'émotions, écrit auparavant, se repose sur cette détection approximative des yeux.\\
+
+% Objectifs
+Pour corriger ce défaut, nous cherchons à extraire les yeux du reste du visage, afin 
+de retrouver des points fixes, nous permettant de recentrer les points calculés auparavant.
+Ensuite, l'objectif est de recentrer la ROI du visage avec les informations que
+nous avons récupéré pour la stabilisé également.  Une fois, que ces
+régions seront stabilisé, le reste de l'application normalisera le
+visage et cela permettra d'avoir des résultats beaucoup plus fiables lors de la
+reconnaissance d'émotion.\\
 
 %en travaillant
 % sur une application qui sera utile à l'équipe. Nous avons travaillé avec l'équipe FOX actuellement sur des projets
