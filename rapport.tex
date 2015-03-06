@@ -1,10 +1,8 @@
 % --------------------------------------
 % Document Class
 % --------------------------------------
-\documentclass[a4paper, 11pt]{article}
+\documentclass[a4paper]{article}
 % --------------------------------------
-
-
 
 % --------------------------------------
 % Use Package
@@ -51,9 +49,6 @@
 \definecolor{ligthblue}{RGB}{1,147,128}
 \definecolor{darkgreen}{RGB}{8,120,51}
 \definecolor{darkred}{RGB}{160,0,0}
-
-% other color
-\definecolor{ivi}{RGB}{141,107,185}
 
 
 \lstset{
@@ -150,19 +145,21 @@
 
   % Start the page counting
   \pagenumbering{arabic}
-
+  
   \maketitle
   
   \mbox{}
   \newpage
   \clearpage
   
-  \tableofcontents
-  \listoffigures
-  
   \include{style}
   \include{partie/remerciment}
   \include{partie/abstract}
+  
+  \tableofcontents
+  \ \\
+  \listoffigures
+  
   \include{partie/introduction}
   \include{partie/existant}
   \include{partie/test}

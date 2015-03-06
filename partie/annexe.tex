@@ -1,4 +1,48 @@
 \section*{Annexes}
 \addcontentsline{toc}{section}{Annexes}
 
+\begin{lstlisting}[caption=Application du filtre de Canny sur des parties de l'image avec la moyenne des niveaux de gris]
+void CannyThreshold(const Mat eyePicture)
+{
+    //voisinage pris en compte pour l'ouverture
+    const Mat element = getStructuringElement(MORPH_RECT, Size(3,3));
+
+    //nombre de division dans l'image
+    const unsigned div = 4;
+
+    //taille des partie de l'image
+    const unsigned divCol = eyePicture.cols / div;
+    const unsigned divRow = eyePicture.rows / div;
+
+    for(unsigned i=0; i<div; i++) {
+        for(unsigned j=0; j<div; j++) {
+
+            //récupération d'une partie de l'image
+            const CvRect part = cvRect(j * divCol, i * divRow, divCol, divRow);
+            Mat partImage(eyePicture, part);
+
+            //calcul de la moyenne de la partie de l'image
+            unsigned moyenne = 0;
+
+            for(unsigned k=0; k<divCol; k++) {
+                for(unsigned l=0; l<divRow; l++) {
+                    moyenne += partImage.at<uchar>(l,k);
+                }
+            }
+
+            moyenne /= divCol * divRow;
+            Canny( partImage, partImage, 0.5*moyenne, 0.7*moyenne, 3, true );
+
+            //ouvertur de l'image pour supprimer les lignes verticales et
+            //horizontal, ainsi qu'un peu de bruit
+            dilate(partImage,partImage,element);
+            erode(partImage,partImage,element);
+        }
+    }
+
+}
+ 
+\end{lstlisting}
+
+
 \newpage
