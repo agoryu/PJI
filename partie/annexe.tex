@@ -44,5 +44,30 @@ void CannyThreshold(const Mat eyePicture)
  
 \end{lstlisting}
 
+\begin{lstlisting}[caption=Normalisation d'une chaine d'une image]
+ void normalize_channel (Mat channel)
+{
+    double min, max;
+    unsigned col = channel.cols;
+    unsigned row = channel.rows;
+
+    if(channel.channels() > 1) {
+        cerr << "erreur dans le nombre de canaux pour la normalisation d'histogramme" << endl;
+    }
+
+    minMaxLoc (channel, &min, &max);
+
+    double scale = 255.0 / (max - min);
+
+    for(unsigned i=0; i<col; i++) {
+        for(unsigned j=0; j<row; j++) {
+            channel.at<uchar>(j,i) -= min;
+            channel.at<uchar>(j,i) *= scale;
+        }
+    }
+
+}
+\end{lstlisting}
+
 
 \newpage
