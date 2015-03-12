@@ -4,13 +4,29 @@
 %TODO revoir le modèle de couche et mettre shéma
 
 \subsection{Reconnaissance du visage : Viola et Jones}
-% L'application est divisée en deux parties. La première recherche le visage grâce à
-% l'algorithme de Viola et Jones et la seconde recherche les yeux dans la région délimitée
-% par l'algorithme précédent.\\
-% 
-% L'algorithme de Viola et Jones est une méthode qui a été créée pour la reconnaissance de visage dans une 
-% image. Cette méthode s'est par la suite généralisée à toutes sortes d'objets. L'algorithme nécessite une 
-% base de connaissances composée des caractèristiques de l'objet recherché.
+L'application est divisée en deux parties. La première recherche le visage grâce à
+l'algorithme de Viola et Jones et la seconde recherche les yeux dans la région délimitée
+précédemment.\\
+
+L'algorithme de Viola et Jones est une méthode qui a été créée pour la reconnaissance de visage dans une 
+image. Cette méthode s'est par la suite généralisée à toutes sortes d'objets. L'algorithme nécessite une 
+base de connaissances composée des caractèristiques de l'objet recherché. L'algorithme de Viola et Jones
+nécessite un apprentissage supervisé, c'est à dire que l'algorithme a besoin de données représentant
+l'objet à détecter pour classifier les caractèristiques de celui-ci.\\
+
+Cette algorithme est basé sur des caractèristiques pseudo-Haar qui crée des masques rectangulaires et adjacentes
+dans différente zone de l'image. Chaque masque calcule l'intensité des pixels qu'il contient, puis l'algorithme fait
+la différence entre les masque blanc et les masque noir. Cette méthode va permettre de détecter des contours ou des changements de 
+texture.\\
+
+\begin{figure}[H]
+\center
+\includegraphics[width=5cm]{image/pseudo_haar.png}
+\caption{Exemple de caractèristiques pseudo-Haar utilisé pour l'algorithme Viola et Jones}
+\end{figure}
+
+Pour améliorer les perfomance de leur algorithme, Viola et Jones utilise la méthode Adaboost. Son
+principe est de séléctionner les caractèristiques les plus performante pour la détection de l'objet.
 
 \subsection{Suivi des yeux}
 %TODO voir quel algo est utilisé à la base -> gaetan?
