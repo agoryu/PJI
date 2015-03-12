@@ -3,7 +3,17 @@
 \subsection{L'algorithme de Canny}
 
 \subsubsection{Version de base}
-%TODO gaetan
+Le filtre de Canny a été créé en 1986 dans le but d'améliorer les résultat du filtre de Sobel.
+Le principe du filtre est d'utiliser deux filtres, un filtre haut et un filtre bas. L'algorithme
+commence par séléctionner les pixels supérieur au seuil haut, puis recherche à partir de chaque
+pixels au dessus du seuil haut les pixels qui sont au dessus du seuil bas. Ainsi on voit 
+que cet algorithme prend en compte deux caractèristiques, l'intensité et la direction des 
+gradients.\\
+
+Nous utilisons cette algorithme dans les régions autour des yeux afin de délimiter le contour
+de chaque oeil. Le résultat permet de faire ressortir l'oeil mais aussi les sourcils et certaines
+ombres présentent dans le creu de l'oeil. Ce filtre permet donc de détecter les contours des yeux,
+mais le résultat comporte beaucoup de bruit. 
 
 \subsubsection{Avec égalisation d'histogramme}
 % L'égalisation d'histogramme est un procédé qui essaye de placer le même nombre de pixels
