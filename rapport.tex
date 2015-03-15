@@ -43,6 +43,9 @@
 
 \usepackage{titlesec}
 
+% bibliographie
+\usepackage[nottoc, notlof, notlot]{tocbibind}
+
 % code color
 \definecolor{ligthyellow}{RGB}{250,247,220}
 \definecolor{darkblue}{RGB}{5,10,85}
@@ -167,6 +170,9 @@
   \include{partie/implementation}
   \include{partie/conclusion}
   \include{partie/annexe}
-  \include{partie/references}
+  
+  % ne pas oublié de citer quelque chose pour que la biblio apparaisse
+  \bibliographystyle{alpha}
+  \bibliography{biblio}
   
 \end{document}

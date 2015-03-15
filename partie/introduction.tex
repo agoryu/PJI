@@ -1,5 +1,5 @@
-\section*{Introduction}
-\addcontentsline{toc}{section}{Introduction}
+\section{Introduction}
+%\addcontentsline{toc}{section}{Introduction}
 
 % Préambule
 Durant nos études de master informatique à l'université de Lille 1,
@@ -8,29 +8,47 @@ recherche. Cette expérience a pour but de nous faire découvrir le
 milieu de la recherche.\\
 
 % Introduction
-Le but du projet est de rendre plus stable la détection des yeux dans une
-application qui permet de faire de la reconnaissance d'émotions à
-travers l'interprétation des mouvements et des expressions du visage. Ce type
-d'application peut être utilisé pour connaître l'intérêt d'une
-personne pour une publicité ou encore connaître l'attention d'un étudiant 
-dans le cadre du e-learning. Ce genre d'outils existe déjà mais dans de nombreux cas, il
-utilise des appareils assez intrusifs pour l'étude des yeux.\\
+L'application sur laquelle nous allons travailler permet de localiser le visage
+d'un individu au travers d'un flux vidéo afin de reconnaitre sur celui-ci différente
+émotion comme la fatigue ou encore l'intérêt de la personne pour quelque chose. Ce procédé
+se démocratise et il est de plus en plus utilisé dans des applications dans le domaine : 
+\begin{itemize}
+ \item de la sécurité, ce qui permettrai de détecter des comportements inhabituel d'un individu.
+ \item du loisir, pour les jeux vidéo ou encore pour une intéraction plus intuitif avec un ordinateur.
+ \item de la publicité, pour que celle-ci corresponde au besoin des individu. 
+\end{itemize}
+\ \\
+Ce type d'application utilise différent type de technologie, mais celle-ci sont souvent très intrusifs 
+et demande à l'utilisateur de mettre un casque ou tout autre appareil du même type. Les applications plus 
+moderne effectue des algorithmes de reconnaissance de forme, tel que l'algorithme de viola et Jones, dans 
+le but de détecter un visage à partir de simple caméra. Cela permet de mieu intégrer ce type d'application 
+afin qu'il n'y est aucune contrainte pour l'utilisateur.\\
+
+L'objectif de l'application sur lequel nous travaillons est de détecter les mouvements
+du visage de l'utilisateur afin d'effectuer de la reconnaissance d'émotions lors d'application
+du type e-learning\footnote{formation en ligne}. Ce procédé permettrai de détecter si un cours 
+intéresse ou non les élèves afin de pouvoir l'améliorer. Si on voit sur une partie du cour
+que de nombreux élèves ont présentés des signes de fatigue ou qu'ils n'écoutaient plus, il sera
+alors possible aux enseignant de modifier cette partie.
+
 
 % Contexte
+\subsection{Contexte}
 Pour la réalisation de ce projet, nous travaillons avec l'équipe FOX qui étudie
-l'analyse du mouvement à partir de vidéos. Plus précisément, leurs recherches portent
+l'analyse du mouvement à partir de vidéos. Leurs recherches portent
 sur l'extraction du comportement humain depuis les flux vidéo.  Leurs travaux sont
-divisés en quatre grands domaines : le regard, qui est la partie sur
-laquelle nous travaillons, l'événement, l'émotion et la
+divisés en quatre grands domaines : le regard, qui est la partie sur laquelle nous travaillons, l'événement, l'émotion et la
 reconnaissance de personnes. La grande majorité de leurs travaux sont
-des applications temps réel, ce qui permet d'avoir un niveau de
-réactivité très élevé. Le projet sur lequel nous avons travaillé est
-basé sur les travaux d'anciens étudiants qui se sont concentrés sur la
-détection de visage et des yeux afin d'extraire les émotions d'une personne. 
-Le projet est une application temps réel, dont les flux vidéo peuvent 
-provenir de vidéos enregistrées ou d'une caméra type webcam.\\
+des applications temps réel, ce qui permet d'avoir un niveau de réactivité très élevé.\\ 
+
+Le projet sur lequel nous travaillons est basé sur les travaux d'anciens étudiants qui se sont concentrés sur la
+détection de visage et des yeux. Une première approche de la reconnaissance d'émotion sur une vidéo a été 
+réalisé par les étudiant précédent, cependant elle n'est pas finalisé. Le projet est une application temps réel, dont les flux vidéo peuvent 
+provenir de vidéos enregistrées ou d'une caméra type webcam. Nos travaux pourront être utilisé par
+l'équipe dans d'autre application de reconnaissance d'émotions sur lesquels ils effectue leur recherche.\\
 
 % Problème
+\subsection{Problèmatique de l'existant}
 Au début du projet, la détection des yeux été implémentée, cependant,
 la méthode de détection est encore approximative et les points permettant de localiser
 les yeux peuvent parfois subir un léger décalage, surtout lorsque 
@@ -38,6 +56,7 @@ la personne ferme les yeux. Le problème étant que les algorithmes de reconnais
 d'émotions, écrits auparavant, se reposent sur cette détection approximative des yeux.\\
 
 % Objectifs
+\subsection{Objectif du projet}
 Pour corriger ce défaut, nous cherchons à extraire les yeux du reste du visage, afin 
 de retrouver des points fixes, nous permettant de recentrer les points calculés auparavant.
 Ensuite, l'objectif est de stabiliser les points pris en compte pour la localisation du visage avec les informations que
@@ -46,26 +65,4 @@ régions seront stabilisées, le reste de l'application normalisera le
 visage et cela permettra d'avoir des résultats beaucoup plus fiables lors de la
 reconnaissance d'émotions.\\
 
-%en travaillant
-% sur une application qui sera utile à l'équipe. Nous avons travaillé avec l'équipe FOX actuellement sur des projets
-% concernant l'analyse du mouvement à partir de flux vidéo.\\
-% 
-% Nous avons eu pour mission d'améliorer un système de recherche des yeux dans une image qui a été développé 
-% par d'ancien étudiant de l'université. Pour cela, nous avons effectué des recherches afin de trouver des 
-% algorithmes permettant d'optimiser ce suivi des yeux, puis nous avons implémenté notre solution.
-% Les résultats de nos travaux permettront d'améliorer la détection d'émotions qui est l'objectif principale 
-% de l'applicaiton.\\
-% 
-% Pour mener à bien ce projet, nous avons du répondre au problèmatique suivante :
-% \begin{itemize}
-%  \item Quel est la solution actuellement présente dans l'application ?
-%  \item Quels sont les points faible de la solution existante ?
-%  \item Avec quel algorithmes peut-on remédier à ces faiblesses ?
-%  \item Comment et où implémenter notre solution ?
-% \end{itemize}
-% 
-% \ \\
-% Pour cela nous allons d'abord détailler la structure de la solution existante. Puis nous allons 
-% décrire l'ensemble des procédés que nous avons testé dans l'application. Et enfin, nous allons
-% décrire et justifier la solution que nous avons implémenter dans l'application.
 \newpage
