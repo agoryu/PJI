@@ -11,9 +11,10 @@ que cet algorithme prend en compte deux caractèristiques, l'intensité et la di
 gradients.\\
 
 Nous utilisons cette algorithme dans les régions autour des yeux afin de délimiter le contour
-de chaque oeil. Le résultat permet de faire ressortir l'oeil mais aussi les sourcils et certaines
+de chaque oeil. Le résultat permet de faire ressortir l'oeil, mais aussi les sourcils et certaines
 ombres présentent dans le creu de l'oeil. Ce filtre permet donc de détecter les contours des yeux,
-mais le résultat comporte beaucoup de bruit. 
+mais le résultat comporte soit beaucoup de bruit, soit trop peu de détails. Dans un premier
+temps, afin d'obtenir un seuil adaptatif, nous prenons la moyenne des pixels.
 
 \begin{figure}[H]
  \center
@@ -22,11 +23,14 @@ mais le résultat comporte beaucoup de bruit.
  \caption{Image de test et résultat de l'algorithme de Canny avec une moyenne des pixels}
 \end{figure}
 
-Peu efficace -> recherche d'une meilleur détermination des seuil de Canny
+On voit que cette méthode, n'est pas optimal et supprime beaucoup trop d'information.
 
 \subsubsection{Avec une moyenne de pixels sur des parties d'image}
 
-décomposition de l'image en plusieurs sous images
+Plutôt, que de prendre la moyenne sur l'image de la zone périoculaire, nous segmentons l'image
+en plusieurs zones dans lesquel nous calculons la moyenne et ou nous effectuons l'algorithme
+de Canny.
+
 \begin{figure}[H]
  \center
  \includegraphics[width=4cm]{image/original.png}
@@ -34,11 +38,16 @@ décomposition de l'image en plusieurs sous images
  \caption{Image de test et résultat de l'algorithme de Canny avec division de l'image en 16}
 \end{figure}
 
-problème trait et bruit
+Avec cette méthode, nous obtenons une image bruité avec les bords de chaque rectangle utilisé
+pour le calcul précédent, car l'algorithme de Canny ne prend pas en compte les bords de l'image
+qu'il traite.
 
-\subsubsection{Erosion et dilatation des sous-images}
+\subsubsection{Ouverture des sous-images}
 
-objectif -> supprimer les traits + suppression du bruit (ombre + ride)
+Afin de supprimer le bruit présent dans le résultat précédent nous effectuons une ouverture
+de chaque sous-image.
+%TODO explication de ce qu'est une ouverture
+
 \begin{figure}[H]
  \center
  \includegraphics[width=4cm]{image/original.png}
@@ -46,7 +55,13 @@ objectif -> supprimer les traits + suppression du bruit (ombre + ride)
  \caption{Image de test et résultat de l'algorithme de Canny avec dilatation puis érosion des sous-images}
 \end{figure}
 
-\subsubsection{Avec égalisation d'histogramme}
+Grâce à ce procédé, nous obtenons une image sans la grille que nous avions précédemment. Cependant,
+le bruit du aux ombres et au ride ne permet pas encore d'effectuer un algorithme de détection de forme
+sur l'oeil.
+
+%TODO mettre la méthode avec le masque
+
+%\subsubsection{Avec égalisation d'histogramme}
 % L'égalisation d'histogramme est un procédé qui essaye de placer le même nombre de pixels
 % sur chaque composante de gris. Ce qui a pour effet d'augmenter le contraste de l'image
 % et devrait ainsi améliorer les hautes fréquences de l'image, donc les contours. Nous avons
@@ -54,12 +69,28 @@ objectif -> supprimer les traits + suppression du bruit (ombre + ride)
 % de Canny.
 %TODO ajout des images
 
+\subsection{Normalisation et égalisation d'histogramme}
+
+\begin{figure}[H]
+ \center
+ \includegraphics[width=4cm]{image/normalisation.png}
+ \caption{Algorithme de Canny après normalisation de l'histogramme de l'image de gris}
+\end{figure}
+
+\begin{figure}[H]
+ \center
+ \includegraphics[width=4cm]{image/egalisationHist.png}
+ \caption{Algorithme de Canny après égalisation de l'histogramme de l'image de gris}
+\end{figure}
+
 Quelque soit les traitements effectué au préalable sur l'image avant l'utilisation de l'algorithme de Canny
 sur une image de gris, nous n'obtenons aucun résultat. Pour supprimer les ombres présentent sur les images
 que nous traitons, nous décidons d'utiliser un autre modèle colorimètrique.
 
 \subsection{Les modèles Colorimètrique}
 \subsubsection{Le modèle HSV}
+
+%TODO explication hsv
 
 \begin{figure}[H]
  \center
@@ -69,7 +100,21 @@ que nous traitons, nous décidons d'utiliser un autre modèle colorimètrique.
  \caption{Décomposition du modèle HSV}
 \end{figure}
 
-solution -> calcul d'un masque avec la value pour réduire l'image pris en compte par canny
+solution -> calcul d'un masque pour réduire l'image pris en compte par canny
+étape de construction du masque : 
+\begin{itemize}
+ \item égalisation des trois composante de l'image de départ
+ \item passage de l'image en hsv
+ \item égalisation de la composante saturation%value
+ \item érosion de l'image
+\end{itemize}
+
+%test avec le value mais a mon avis c pas tres stable -> voir masqueAv.png et masqueAp.png
+\begin{figure}[H]
+ \center
+ \includegraphics[width=4cm]{image/resultatMasque.png}
+ \caption{Résultat du masque après application du masque}
+\end{figure}
 
 saturation -> probleme sur la couleur de peau.
 
@@ -104,6 +149,20 @@ $$V = 0.615R -0.515G -0.100B = 0.877(R-Y)$$
  \includegraphics[width=4cm]{image/chrominance2_black.png}
  \caption{Décomposition du modèle YUV avec une couleur de peau plus foncée}
 \end{figure}
+
+\begin{figure}[H]
+ \center
+ \includegraphics[width=4cm]{image/pupille.png}
+ \caption{Résulata après traitement sur la chominance 1}
+\end{figure}
+
+\begin{figure}[H]
+ \center
+ \includegraphics[width=4cm]{image/localisation1.png}
+ \caption{Première localisation du centre de l'oeil avec traitement sur le modèle YUV}
+\end{figure}
+
+problème -> instable et ne fonctionnement pas sur toutes les personnes
 
 \subsection{Détection des contours et calcul du barycentre de la forme}
 
