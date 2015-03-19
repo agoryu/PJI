@@ -49,11 +49,17 @@ l'équipe dans d'autre application de reconnaissance d'émotions sur lesquels il
 
 % Problème
 \subsection{Problèmatique de l'existant}
-Au début du projet, la détection des yeux été implémentée, cependant,
-la méthode de détection est encore approximative et les points permettant de localiser
-les yeux peuvent parfois subir un léger décalage, surtout lorsque 
-la personne ferme les yeux. Le problème étant que les algorithmes de reconnaissance 
-d'émotions, écrits auparavant, se reposent sur cette détection approximative des yeux.\\
+Les algorithmes de localisation du visage utilisés dans le projet sont très performant. Cependant,
+ils ont quelques limitations lorsqu'ils sont utilisé sur des applications temps réel. De nombreux cas ne sont
+pas traité dans ce type d'algorithme commme par exemple l'orientation du visage.
+
+Actuellement l'application n'arrive pas à suivre un visage dont les yeux sont fermés. De plus, les points représentant
+le centre des yeux ne sont pas parfaitement stable, ce qui gène le bon déroulement de l'application.
+% Au début du projet, la détection des yeux était implémentée, cependant,
+% la méthode de détection est encore approximative et les points permettant de localiser
+% les yeux peuvent parfois subir un léger décalage, surtout lorsque 
+% la personne ferme les yeux. Le problème étant que les algorithmes de reconnaissance 
+% d'émotions, écrits auparavant, se reposent sur cette détection approximative des yeux.\\
 
 % Objectifs
 \subsection{Objectif du projet}
