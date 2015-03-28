@@ -49,26 +49,44 @@ l'équipe dans d'autre application de reconnaissance d'émotions sur lesquels il
 
 % Problème
 \subsection{Problèmatique de l'existant}
-Les algorithmes de localisation du visage utilisés dans le projet sont très performant. Cependant,
-ils ont quelques limitations lorsqu'ils sont utilisé sur des applications temps réel. De nombreux cas ne sont
-pas traité dans ce type d'algorithme commme par exemple l'orientation du visage.
+%orientation du visage
+Les algorithmes utilisé dans l'application sont limité et ne permette pas de faire un suivi correcte
+dans toutes les situation d'une application temps réel. De nombreux cas ne sont
+pas traité dans ce type d'algorithme commme par exemple l'orientation du visage. Lorsque
+l'utilisateur effectue une rotation de la tête, les algorithmes utilisés ne sont pas capable
+de suivre ce mouvement. Il faut donc être capable, grâce à différent axe présent dans le visage, de détecter
+ce mouvement afin de garder une région d'intêrer correcte pour les traitements suivant.\\
 
-Actuellement l'application n'arrive pas à suivre un visage dont les yeux sont fermés. De plus, les points représentant
-le centre des yeux ne sont pas parfaitement stable, ce qui gène le bon déroulement de l'application.
-% Au début du projet, la détection des yeux était implémentée, cependant,
-% la méthode de détection est encore approximative et les points permettant de localiser
-% les yeux peuvent parfois subir un léger décalage, surtout lorsque 
-% la personne ferme les yeux. Le problème étant que les algorithmes de reconnaissance 
-% d'émotions, écrits auparavant, se reposent sur cette détection approximative des yeux.\\
+%les yeux fermés
+Actuellement l'application n'arrive pas à suivre un visage dont les yeux sont fermés. En effet,
+l'algorithme de Viola et Jones repose sur la localisaiton de plusieurs points du visage, dont 
+les yeux sont les points les plus important. Cela implique que si une personne cligne des yeux
+l'application a des difficultées pour retrouver le visage pour la suite des traitement et cela 
+cause de nombreuses erreurs. Il n'est donc actuellement pas possible des reconnaître des émotions
+sur le visage lorsque celui-ci ferme les yeux.\\
+
+%stabilité des centres des yeux
+De plus, les points représentant le centre des yeux ne sont pas parfaitement stable. Ce décalage a de 
+nombreuses conséquences sur la reconnaissance d'émotion effectué par l'application, car pour effectuer
+ce traitement, l'application se base sur les ombres provoqué par le mouvement de certain muscle du 
+visage. Il est donc primordiale que la position de ces muscles soit stable, pour ne pas les confondres
+lors des traitements.\\
 
 % Objectifs
 \subsection{Objectif du projet}
-Pour corriger ce défaut, nous cherchons à extraire les yeux du reste du visage, afin 
-de retrouver des points fixes, nous permettant de recentrer les points calculés auparavant.
-Ensuite, l'objectif est de stabiliser les points pris en compte pour la localisation du visage avec les informations que
-nous avons récupéré.  Une fois que ces
-régions seront stabilisées, le reste de l'application normalisera le
-visage et cela permettra d'avoir des résultats beaucoup plus fiables lors de la
-reconnaissance d'émotions.\\
+Pour palier à ces différentes problèmatique, nous avons besoin de parfaitement localiser le centre des
+yeux. Pour cela, il existe différent algorithme permettant de détecter des contours. Lorsque nous aurons
+détecter les contours des yeux, il nous sera alors possbile de calculer le centre de la forme
+que nous aurons détecté. Les algorithmes de reconnaissance de forme ont besoin, pour effectuer leur traitement,
+d'une image binaire contenant la forme. Il nous faut donc déterminer quels sont les traitements à effectuer
+sur l'image d'origine récupéré par l'application afin de bien faire ressortir la forme d'un oeil. L'image
+sur laquelle nous travaillons est une image de la zone péri-oculaire de l'utilisateur, qui est calculé par
+l'algorithme actuel de l'application. Nous allons donc utiliser l'algorithme actuelle afin d'affiner la localisation
+du centre de l'oeil.\\
+
+Le second objectif est de calculer le centre de l'oeil lorsque celui ci est fermé. 
+
+%Plusieurs solutions sont possble,
+%mais nous allons d'abord commencer par utiliser un filtre détectant les textures dans une image.
 
 \newpage
