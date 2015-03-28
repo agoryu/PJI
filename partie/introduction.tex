@@ -84,7 +84,11 @@ sur laquelle nous travaillons est une image de la zone péri-oculaire de l'utili
 l'algorithme actuel de l'application. Nous allons donc utiliser l'algorithme actuelle afin d'affiner la localisation
 du centre de l'oeil.\\
 
-Le second objectif est de calculer le centre de l'oeil lorsque celui ci est fermé. 
+Le second objectif est de calculer le centre de l'oeil lorsque celui ci est fermé. Cette étape est plus complexe,
+car contrairement à un oeil ouvert, l'oeil fermé à la même couleur que la peau. Il faut donc réussir à différencier ces
+deux situations afin d'appliquer le bon traitement. Une première approche lors de la détection de l'oeil fermé est 
+de travailler avec des filtres qui détecte des textures. L'idée est que la pupille a une texture différente de celle 
+du reste du visage.
 
 %Plusieurs solutions sont possble,
 %mais nous allons d'abord commencer par utiliser un filtre détectant les textures dans une image.
