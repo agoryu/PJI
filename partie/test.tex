@@ -4,9 +4,11 @@
 
 \subsubsection{Version de base}
 Le filtre de Canny a été créé en 1986 dans le but d'améliorer les résultat du filtre de Sobel.
-Le principe du filtre est d'utiliser deux filtres, un filtre haut et un filtre bas. L'algorithme
+Le principe du filtre est d'utiliser deux seuil, un seuil haut et un seuil bas. L'algorithme
 commence par séléctionner les pixels supérieur au seuil haut, puis recherche à partir de chaque
-pixels au dessus du seuil haut les pixels qui sont au dessus du seuil bas. Ainsi on voit 
+pixels au dessus du seuil haut les pixels qui sont au dessus du seuil bas dans son voisinage. 
+Chaque voisin qui est entre les deux seuils appartient à un contour, on passe donc sa valeur à
+255 pour le prendre en compte dasn le contour. Ainsi on voit 
 que cet algorithme prend en compte deux caractèristiques, l'intensité et la direction des 
 gradients.\\
 
@@ -14,7 +16,7 @@ Nous utilisons cette algorithme dans les régions autour des yeux afin de délim
 de chaque oeil. Le résultat permet de faire ressortir l'oeil, mais aussi les sourcils et certaines
 ombres présentent dans le creu de l'oeil. Ce filtre permet donc de détecter les contours des yeux,
 mais le résultat comporte soit beaucoup de bruit, soit trop peu de détails. Dans un premier
-temps, afin d'obtenir un seuil adaptatif, nous prenons la moyenne des pixels.
+temps, pour obtenir un seuil adaptatif, nous prenons la moyenne des pixels.
 
 \begin{figure}[H]
  \center
@@ -23,7 +25,8 @@ temps, afin d'obtenir un seuil adaptatif, nous prenons la moyenne des pixels.
  \caption{Image de test et résultat de l'algorithme de Canny avec une moyenne des pixels}
 \end{figure}
 
-On voit que cette méthode, n'est pas optimal et supprime beaucoup trop d'information.
+On voit que cette méthode, n'est pas optimal et supprime beaucoup trop d'information. De plus,
+l'algorithme prend beaucoup trop en compte les ombres présentent dans l'image.
 
 \subsubsection{Avec une moyenne de pixels sur des parties d'image}
 
@@ -40,13 +43,21 @@ de Canny.
 
 Avec cette méthode, nous obtenons une image bruité avec les bords de chaque rectangle utilisé
 pour le calcul précédent, car l'algorithme de Canny ne prend pas en compte les bords de l'image
-qu'il traite.
+qu'il traite. Avec ce bruit nous ne pouvons clairement pas effectuer une recherche de l'oeil dans
+l'image.
 
 \subsubsection{Ouverture des sous-images}
 
-Afin de supprimer le bruit présent dans le résultat précédent nous effectuons une ouverture
+La dilatation d'une image est une opération morphologique\footnote{filtre non-linéaire} qui pour chaque
+pixel de celle-ci, remplace la valeurs des pixels voisin du pixel traité par la valeur de celui-ci.
+Cette opération à en général pour effet d'élargir une forme et de combler les trous qui peut y avoir
+dans cette forme. Nous avons également l'opération inverse qui est l'érosion, qui va rétrécire la forme.\\
+
+L'ouverture est la combinaison des deux opérations morphologique vu précédemment, en commençant par 
+l'érosion puis la dilatation. Cela à pour effet de fusionner des formes si elles sont proches (dans ce
+cas il y a des chances que se soit la même forme) et de diminuer la largeur de la forme pour 
+s'approcher de la forme réel. Afin de supprimer le bruit présent dans le résultat précédent nous effectuons une ouverture
 de chaque sous-image.
-%TODO explication de ce qu'est une ouverture
 
 \begin{figure}[H]
  \center
@@ -57,7 +68,9 @@ de chaque sous-image.
 
 Grâce à ce procédé, nous obtenons une image sans la grille que nous avions précédemment. Cependant,
 le bruit du aux ombres et au ride ne permet pas encore d'effectuer un algorithme de détection de forme
-sur l'oeil.
+sur l'oeil. Afin de supprimer les bruits du à l'ombre, nous décidons de travailler sur d'autre modèle
+colorimètrique comme le HSV\footnote{Hue Saturation Value} dont la composante \enquote{saturation} peut nous
+permettre de diminuer l'ombre de l'image.
 
 %TODO mettre la méthode avec le masque
 
@@ -69,28 +82,28 @@ sur l'oeil.
 % de Canny.
 %TODO ajout des images
 
-\subsection{Normalisation et égalisation d'histogramme}
-
-\begin{figure}[H]
- \center
- \includegraphics[width=4cm]{image/normalisation.png}
- \caption{Algorithme de Canny après normalisation de l'histogramme de l'image de gris}
-\end{figure}
-
-\begin{figure}[H]
- \center
- \includegraphics[width=4cm]{image/egalisationHist.png}
- \caption{Algorithme de Canny après égalisation de l'histogramme de l'image de gris}
-\end{figure}
-
-Quelque soit les traitements effectué au préalable sur l'image avant l'utilisation de l'algorithme de Canny
-sur une image de gris, nous n'obtenons aucun résultat. Pour supprimer les ombres présentent sur les images
-que nous traitons, nous décidons d'utiliser un autre modèle colorimètrique.
+% \subsection{Normalisation et égalisation d'histogramme}
+% 
+% \begin{figure}[H]
+%  \center
+%  \includegraphics[width=4cm]{image/normalisation.png}
+%  \caption{Algorithme de Canny après normalisation de l'histogramme de l'image de gris}
+% \end{figure}
+% 
+% \begin{figure}[H]
+%  \center
+%  \includegraphics[width=4cm]{image/egalisationHist.png}
+%  \caption{Algorithme de Canny après égalisation de l'histogramme de l'image de gris}
+% \end{figure}
+% 
+% Quelque soit les traitements effectué au préalable sur l'image avant l'utilisation de l'algorithme de Canny
+% sur une image de gris, nous n'obtenons aucun résultat. Pour supprimer les ombres présentent sur les images
+% que nous traitons, nous décidons d'utiliser un autre modèle colorimètrique.
 
 \subsection{Les modèles Colorimètrique}
 \subsubsection{Le modèle HSV}
 
-%TODO explication hsv
+%TODO explication hsv Gaetan
 
 \begin{figure}[H]
  \center
@@ -127,12 +140,27 @@ saturation -> probleme sur la couleur de peau.
  \caption{Décomposition du modèle HSV avec une couleur de peau plus foncée}
 \end{figure}
 
-\subsubsection{Le modèle YUV}
+\subsubsection{Le modèle YCbCr}
 
-calcule RGB vers YUV
+Nous avons testé un second modèle colorimètrique suite à l'étude des travaux de Evangelos Skodras et Nikolaos Fakotakis\cite{Skodras_2012ieee}.
+En effet, leur étude montre que les différentes couleurs de peau de l'Homme ont la peu près la même valeur dans les deux
+composantes de du modèle YCbCr.\\
+
+\begin{figure}[H]
+ \center
+ \includegraphics[width=4cm]{image/yuv_blanc.png}
+ \includegraphics[width=3cm]{image/yuv_asiat.png}
+ \includegraphics[width=4cm]{image/yuv_noire.png}
+ \caption{Image dans le modèle YCbCr d'une personne blanche, asiatique et noire}
+\end{figure}
+
+Nous pouvons voir que quelque soit la couleur de peau des personnes étudié, la couleur
+de la peau est verdâtre, mais la pupille elle reste foncée. Il est donc plus aisé de travailler 
+dans ce modèle pour ne plus avoir à prendre en compte la couleur de peau. Il est possible d'obtenir
+ce modèle à partir du modèle RGB grâce à la formule suivante : 
 $$Y = 0.299R + 0.587 G + 0.114 B$$
-$$U = -0.147R - 0.289 G + 0.436B = 0.492(B - Y)$$
-$$V = 0.615R -0.515G -0.100B = 0.877(R-Y)$$
+$$Cb = -0.1687R - 0.3313 G + 0.5B + 128$$
+$$Cr = 0.5R -0.4187G -0.0813B + 128$$
 
 \begin{figure}[H]
  \center

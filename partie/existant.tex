@@ -8,10 +8,10 @@ L'application est divisée en deux parties. La première recherche le visage gr�
 l'algorithme de Viola et Jones et la seconde recherche les yeux dans la région délimitée
 précédemment.\\
 
-L'algorithme de Viola et Jones est une méthode qui a été créée pour la reconnaissance de visage dans une 
+L'algorithme de Viola et Jones\cite{Viola04robustreal-time} est une méthode qui a été créée pour la reconnaissance de visage dans une 
 image. Cette méthode s'est par la suite généralisée à toutes sortes d'objets. L'algorithme nécessite une 
-base de connaissances composée des caractèristiques de l'objet recherché. L'algorithme de Viola et Jones
-nécessite un apprentissage supervisé, c'est à dire que l'algorithme a besoin de données représentant
+base de connaissances composée des caractèristiques de l'objet recherché. Cette base de connaissances est utilisé dans un 
+apprentissage supervisé, c'est à dire que l'algorithme a besoin de données représentant
 l'objet à détecter pour classifier les caractèristiques de celui-ci.\\
 
 Cette algorithme est basé sur des caractèristiques pseudo-Haar qui crée des masques rectangulaires et adjacentes
@@ -26,7 +26,8 @@ texture.\\
 \end{figure}
 
 Pour améliorer les perfomance de leur algorithme, Viola et Jones utilise la méthode Adaboost. Son
-principe est de séléctionner les caractèristiques les plus performante pour la détection de l'objet.
+principe est de séléctionner les caractèristiques les plus performante pour la détection de l'objet grâce à
+un calcule de probabilité utilisant l'entropie\footnote{valeur mesurant l'incertitude d'une données} des données.
 
 \subsection{Suivi des yeux}
 %TODO voir quel algo est utilisé à la base -> gaetan?
