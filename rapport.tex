@@ -17,6 +17,8 @@
 
 % page layout
 \usepackage{geometry}
+\usepackage{multicol}
+\setlength{\columnsep}{4cm}
 
 % hypertext link
 \usepackage[pdfpagelabels]{hyperref}
@@ -52,6 +54,9 @@
 \definecolor{ligthblue}{RGB}{1,147,128}
 \definecolor{darkgreen}{RGB}{8,120,51}
 \definecolor{darkred}{RGB}{160,0,0}
+\definecolor{univ}{RGB}{177,23,119}
+\definecolor{univmodif}{RGB}{148,74,120}
+\definecolor{mygray}{RGB}{100,100,100}
 
 
 \lstset{
@@ -88,7 +93,7 @@
 % Page setting
 % --------------------------------------
 %\pagestyle{empty}
-\setlength{\headheight}{15pt}
+
 
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{2}
@@ -146,17 +151,24 @@
 
   % Set language to french
   \selectlanguage{francais}
-
+  
   % Start the page counting
   \pagenumbering{arabic}
   
-  \maketitle
+  % page de garde
+  \include{partie/garde}
   
-  \mbox{}
+  \include{style}
+  
+  %\maketitle
+  %\mbox{}
+  
+ 
+  
   \newpage
   \clearpage
   
-  \include{style}
+  
   \include{partie/remerciment}
   \include{partie/abstract}
   
