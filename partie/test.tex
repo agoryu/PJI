@@ -48,10 +48,13 @@ l'image.
 
 \subsubsection{Ouverture des sous-images}
 
-La dilatation d'une image est une opération morphologique\footnote{filtre non-linéaire} qui pour chaque
-pixel de celle-ci, remplace la valeurs des pixels voisin du pixel traité par la valeur de celui-ci.
+La dilatation d'une image est une opération morphologique\footnote{filtre non-linéaire} qui utilise 
+un élément structurant afin d'effectuer une convolution de l'image. Si l'un des voisins du pixel traité
+est blanc alors celui-ci sera blanc, sinon il sera noire.
 Cette opération à en général pour effet d'élargir une forme et de combler les trous qui peut y avoir
-dans cette forme. Nous avons également l'opération inverse qui est l'érosion, qui va rétrécire la forme.\\
+dans cette forme. Nous avons également l'opération inverse qui est l'érosion, qui va rétrécire la forme.
+Lorsqu'une dilatation est effectué sur une image en niveau de gris, le pixel traité prend la valeur maximum parmi
+ces voisins, et le minimum pour la dilatation.\\
 
 L'ouverture est la combinaison des deux opérations morphologique vu précédemment, en commençant par 
 l'érosion puis la dilatation. Cela à pour effet de fusionner des formes si elles sont proches (dans ce
@@ -143,26 +146,10 @@ saturation -> probleme sur la couleur de peau.
 \subsubsection{Le modèle YCbCr}
 
 Nous avons testé un second modèle colorimètrique suite à l'étude des travaux de Evangelos Skodras et Nikolaos Fakotakis\cite{Skodras_2012ieee}.
-En effet, leur étude montre que les différentes couleurs de peau de l'Homme ont la peu près la même valeur dans les deux
-composantes de du modèle YCbCr.\\
+En effet, leur étude montre que les différentes couleurs de peau de l'Homme ont à peu près la même valeur dans les deux
+composantes du modèle YCbCr.\\
 
-\begin{figure}[H]
- \center
- \includegraphics[width=4cm]{image/yuv_blanc.png}
- \includegraphics[width=3cm]{image/yuv_asiat.png}
- \includegraphics[width=4cm]{image/yuv_noire.png}
- \caption{Image dans le modèle YCbCr d'une personne blanche, asiatique et noire}
-\end{figure}
-
-Nous pouvons voir que quelque soit la couleur de peau des personnes étudié, la couleur
-de la peau est verdâtre, mais la pupille elle reste foncée. Il est donc plus aisé de travailler 
-dans ce modèle pour ne plus avoir à prendre en compte la couleur de peau. Il est possible d'obtenir
-ce modèle à partir du modèle RGB grâce à la formule suivante : 
-$$Y = 0.299R + 0.587 G + 0.114 B$$
-$$Cb = -0.1687R - 0.3313 G + 0.5B + 128$$
-$$Cr = 0.5R -0.4187G -0.0813B + 128$$
-
-On peut voir sur le résultat de la décomposition de l'image que les deux derniers canaux mette 
+On peut voir sur le résultat de la décomposition de l'image que le canal représentant la première chominance met 
 en évidence la pupille de l'oeil.
 \begin{figure}[H]
  \center
@@ -180,20 +167,36 @@ en évidence la pupille de l'oeil.
  \caption{Décomposition du modèle YUV avec une couleur de peau plus foncée}
 \end{figure}
 
+Pour obtenir la valeur des différentes composantes de cet espace colorimètrique à partir
+d'une image RGB il faut effectuer les calculs suivant :
+$$Y = 0.299R + 0.587 G + 0.114 B$$
+$$Cb = -0.1687R - 0.3313 G + 0.5B + 128$$
+$$Cr = 0.5R -0.4187G -0.0813B + 128$$
+
+%TODO explication avec la couleur de la peau.
+
+En prenant le canal de la première chrominance et en trouvant le bon seuil pour la binarisation,
+nous obtenons une image comportant la forme de l'oeil au bon endroit. Nous pouvons alors calculer
+le barycentre de la forme obtenu afin de récupérer le centre de l'oeil.
+
 \begin{figure}[H]
  \center
  \includegraphics[width=4cm]{image/pupille.png}
- \caption{Résulata après traitement sur la chominance 1}
+ \caption{Résulat après traitement sur la chominance 1 et localisation du barycentre de la forme}
 \end{figure}
+
+\subsection{Détection des contours et calcul du barycentre de la forme}
+
+%TODO explication detection de contour et vite fait barycentre
 
 \begin{figure}[H]
  \center
  \includegraphics[width=4cm]{image/localisation1.png}
- \caption{Première localisation du centre de l'oeil avec traitement sur le modèle YUV}
+ \caption{Résulat après traitement sur la chominance 1 et localisation du barycentre de la forme}
 \end{figure}
 
-problème -> instable et ne fonctionnement pas sur toutes les personnes
-
-\subsection{Détection des contours et calcul du barycentre de la forme}
+Cependant, cette méthode une fois appliqué sur les vidéos de test, ne donne pas un résultat très stable.
+La forme que l'on obtient subit des variations importantes lors du mouvement de la tête et des pupille,
+ce qui fait beaucoup varié le calcul du barycentre.
 
 \subsection{L'algorithme de Gabor}
