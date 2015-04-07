@@ -104,44 +104,44 @@ permettre de diminuer l'ombre de l'image.
 % que nous traitons, nous décidons d'utiliser un autre modèle colorimètrique.
 
 \subsection{Les modèles Colorimètrique}
-\subsubsection{Le modèle HSV}
-
-%TODO explication hsv Gaetan
-
-\begin{figure}[H]
- \center
- \includegraphics[width=4cm]{image/hue.png}
- \includegraphics[width=4cm]{image/saturation.png}
- \includegraphics[width=4cm]{image/value.png}
- \caption{Décomposition du modèle HSV}
-\end{figure}
-
-solution -> calcul d'un masque pour réduire l'image pris en compte par canny
-étape de construction du masque : 
-\begin{itemize}
- \item égalisation des trois composante de l'image de départ
- \item passage de l'image en hsv
- \item égalisation de la composante saturation%value
- \item érosion de l'image
-\end{itemize}
-
-%test avec le value mais a mon avis c pas tres stable -> voir masqueAv.png et masqueAp.png
-\begin{figure}[H]
- \center
- \includegraphics[width=4cm]{image/resultatMasque.png}
- \caption{Résultat du masque après application du masque}
-\end{figure}
-
-saturation -> probleme sur la couleur de peau.
-
-\begin{figure}[H]
- \center
- \includegraphics[width=4cm]{image/original_black.png}
- \includegraphics[width=4cm]{image/hue_black.png}
- \includegraphics[width=4cm]{image/saturation_black.png}
- \includegraphics[width=4cm]{image/value_black.png}
- \caption{Décomposition du modèle HSV avec une couleur de peau plus foncée}
-\end{figure}
+% \subsubsection{Le modèle HSV}
+% 
+% %TODO explication hsv Gaetan
+% 
+% \begin{figure}[H]
+%  \center
+%  \includegraphics[width=4cm]{image/hue.png}
+%  \includegraphics[width=4cm]{image/saturation.png}
+%  \includegraphics[width=4cm]{image/value.png}
+%  \caption{Décomposition du modèle HSV}
+% \end{figure}
+% 
+% solution -> calcul d'un masque pour réduire l'image pris en compte par canny
+% étape de construction du masque : 
+% \begin{itemize}
+%  \item égalisation des trois composante de l'image de départ
+%  \item passage de l'image en hsv
+%  \item égalisation de la composante saturation%value
+%  \item érosion de l'image
+% \end{itemize}
+% 
+% %test avec le value mais a mon avis c pas tres stable -> voir masqueAv.png et masqueAp.png
+% \begin{figure}[H]
+%  \center
+%  \includegraphics[width=4cm]{image/resultatMasque.png}
+%  \caption{Résultat du masque après application du masque}
+% \end{figure}
+% 
+% saturation -> probleme sur la couleur de peau.
+% 
+% \begin{figure}[H]
+%  \center
+%  \includegraphics[width=4cm]{image/original_black.png}
+%  \includegraphics[width=4cm]{image/hue_black.png}
+%  \includegraphics[width=4cm]{image/saturation_black.png}
+%  \includegraphics[width=4cm]{image/value_black.png}
+%  \caption{Décomposition du modèle HSV avec une couleur de peau plus foncée}
+% \end{figure}
 
 \subsubsection{Le modèle YCbCr}
 
@@ -156,7 +156,7 @@ en évidence la pupille de l'oeil.
  \includegraphics[width=4cm]{image/luminance.png}
  \includegraphics[width=4cm]{image/chrominance1.png}
  \includegraphics[width=4cm]{image/chrominance2.png}
- \caption{Décomposition du modèle YUV}
+ \caption{Décomposition du modèle YCbCr}
 \end{figure}
 
 \begin{figure}[H]
@@ -164,7 +164,7 @@ en évidence la pupille de l'oeil.
  \includegraphics[width=4cm]{image/luminance_black.png}
  \includegraphics[width=4cm]{image/chrominance1_black.png}
  \includegraphics[width=4cm]{image/chrominance2_black.png}
- \caption{Décomposition du modèle YUV avec une couleur de peau plus foncée}
+ \caption{Décomposition du modèle YCbCr avec une couleur de peau plus foncée}
 \end{figure}
 
 Pour obtenir la valeur des différentes composantes de cet espace colorimètrique à partir
@@ -172,6 +172,21 @@ d'une image RGB il faut effectuer les calculs suivant :
 $$Y = 0.299R + 0.587 G + 0.114 B$$
 $$Cb = -0.1687R - 0.3313 G + 0.5B + 128$$
 $$Cr = 0.5R -0.4187G -0.0813B + 128$$
+
+\begin{figure}[H]
+ \begin{tabular}{|c|c|c|c|c|c|c|}
+  \hline
+  couleur de peau & rouge & verte & bleu & luminance(Y) & chrominance 1(Cb) & chrominance 2(Cr)\\
+  \hline
+  blanc & 234 & 171 & 130 & 185 & 97 & 163 \\
+  \hline
+  bronzé & 175 & 112 & 95 & 129 & 109 & 161 \\
+  \hline
+  asiatique & 202 & 143 & 111 & 157 & 102 & 160\\
+  \hline
+ \end{tabular}
+ \caption{Tableau des valeurs des couleurs de peau dans les espaces RGB et YCbCr}
+\end{figure}
 
 %TODO explication avec la couleur de la peau.
 
@@ -182,21 +197,29 @@ le barycentre de la forme obtenu afin de récupérer le centre de l'oeil.
 \begin{figure}[H]
  \center
  \includegraphics[width=4cm]{image/pupille.png}
- \caption{Résulat après traitement sur la chominance 1 et localisation du barycentre de la forme}
+ \caption{Résulat après traitement sur la chominance 1}
 \end{figure}
 
-\subsection{Détection des contours et calcul du barycentre de la forme}
+\subsection{Détection des contours avec des blobs}
+Maintenant que nous obtenons une image binarisé comportant la forme de l'oeil, nous pouvons déterminer ou est
+positionné le centre de l'oeil. Pour cela nous avons choisi l'utilisation de blob afin de résoudre un second 
+problème que nous avons rencontré. Lorsque nous effectuons les traitements précédent sur la vidéo, nous avons
+parfois des éléments qui perturbe la détection de contour comme des montures de lunette ou les cheveux de la personne 
+filmé. Ces éléments peuvent faire partie des formes que nous récupérons lors de la binarisation. Les blobs
+sont des objets qui vont détecter des formes dans une image, mais il est possible d'ajouter des caractèristiques
+à ces blobs afin de récupérer seulement les formes qui possède ces caractèristiques.\\
 
-%TODO explication detection de contour et vite fait barycentre
+Les blobs sont des éléments formé à partir d'une courbe 3D des fréquences d'une image.
+%TODO en attente de la réinstallation scilab pour afficher des images pour les explication
 
-\begin{figure}[H]
- \center
- \includegraphics[width=4cm]{image/localisation1.png}
- \caption{Résulat après traitement sur la chominance 1 et localisation du barycentre de la forme}
-\end{figure}
+Pour obtenir les blobs correspondant au yeux nous avons utilisé les paramètres :
+\begin{itemize}
+ \item la convexité : les yeux étant censé être une forme ovale, il ne devrait pas y'avoir de segment, entre 
+ deux points, qui dépasse de la forme.
+ \item l'aire de la forme : ce qui permet de ne pas prendre en compte les formes plus petites.
+ \item la circularité de la forme : ce qui permet de ne pas prendre en compte les formes longue comme les cheveux
+ sur le côté du visage.
+\end{itemize}
 
-Cependant, cette méthode une fois appliqué sur les vidéos de test, ne donne pas un résultat très stable.
-La forme que l'on obtient subit des variations importantes lors du mouvement de la tête et des pupille,
-ce qui fait beaucoup varié le calcul du barycentre.
 
 \subsection{L'algorithme de Gabor}
