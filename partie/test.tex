@@ -71,41 +71,30 @@ de chaque sous-image.
 
 Grâce à ce procédé, nous obtenons une image sans la grille que nous avions précédemment. Cependant,
 le bruit du aux ombres et au ride ne permet pas encore d'effectuer un algorithme de détection de forme
-sur l'oeil. Afin de supprimer les bruits du à l'ombre, nous décidons de travailler sur d'autre modèle
+sur l'oeil. Afin de supprimer les bruits du aux ombres presentent dans l'image, nous décidons de travailler sur d'autre modèle
 colorimètrique comme le HSV\footnote{Hue Saturation Value} dont la composante \enquote{saturation} peut nous
 permettre de diminuer l'ombre de l'image.
 
-%TODO mettre la méthode avec le masque
-
-%\subsubsection{Avec égalisation d'histogramme}
-% L'égalisation d'histogramme est un procédé qui essaye de placer le même nombre de pixels
-% sur chaque composante de gris. Ce qui a pour effet d'augmenter le contraste de l'image
-% et devrait ainsi améliorer les hautes fréquences de l'image, donc les contours. Nous avons
-% essayé d'appliquer cette méthode sur une image en niveau de gris avant de lancer l'algorithme
-% de Canny.
-%TODO ajout des images
-
-% \subsection{Normalisation et égalisation d'histogramme}
-% 
-% \begin{figure}[H]
-%  \center
-%  \includegraphics[width=4cm]{image/normalisation.png}
-%  \caption{Algorithme de Canny après normalisation de l'histogramme de l'image de gris}
-% \end{figure}
-% 
-% \begin{figure}[H]
-%  \center
-%  \includegraphics[width=4cm]{image/egalisationHist.png}
-%  \caption{Algorithme de Canny après égalisation de l'histogramme de l'image de gris}
-% \end{figure}
-% 
-% Quelque soit les traitements effectué au préalable sur l'image avant l'utilisation de l'algorithme de Canny
-% sur une image de gris, nous n'obtenons aucun résultat. Pour supprimer les ombres présentent sur les images
-% que nous traitons, nous décidons d'utiliser un autre modèle colorimètrique.
-
 \subsection{Les modèles Colorimètrique}
-% \subsubsection{Le modèle HSV}
-% 
+\subsubsection{Le modèle HSV}
+Le modèle colorimètrique HSV est composé de la teinte\footnote{Hue}, la saturation\footnote{Saturation} et la valeur\footnote{Value}.
+La teinte correspond à la forme la plus pur des couleurs. La saturation est l'intensité de la couleur, plus cette valeur est faible
+et plus la couleur semble fade. Et enfin la valeur correspond à la luminosité de la couleur, plus cette valeur est petite et plus la
+couleur est sombre.\\
+
+Nous avons essayé de décomposer l'image dans les trois canaux de HSV sur notre image de test. Nous pensons pouvoir
+utiliser la composante saturation afin de de ne plus avoir le problème des ombres qui doivent être représenté dans la composante valeur.
+
+\begin{figure}[H]
+ \center
+ \includegraphics[width=4cm]{image/hue.png}
+ \includegraphics[width=4cm]{image/saturation.png}
+ \includegraphics[width=4cm]{image/value.png}
+ \caption{Décomposition du modèle HSV}
+\end{figure}
+
+Nous pouvons voir que la saturation est initulisable tel quel, car les valeurs sont beaucoup trop basse et trop proche.
+
 % %TODO explication hsv Gaetan
 % 
 % \begin{figure}[H]
@@ -188,11 +177,11 @@ $$Cr = 0.5R -0.4187G -0.0813B + 128$$
  \caption{Tableau des valeurs des couleurs de peau dans les espaces RGB et YCbCr}
 \end{figure}
 
-%TODO explication avec la couleur de la peau.
-
-En prenant le canal de la première chrominance et en trouvant le bon seuil pour la binarisation,
-nous obtenons une image comportant la forme de l'oeil au bon endroit. Nous pouvons alors calculer
-le barycentre de la forme obtenu afin de récupérer le centre de l'oeil.
+Nous pouvons voir avec ce tableau que la valeurs des deux chrominances sont très proche quelque soit
+la couleur de la peau. Pour la suite des traitements, nous décidons de garder la chrominance 1 qui semble
+varier un peu moins avec le changement de luminosité. En prenant le canal de la première chrominance et en 
+trouvant le bon seuil pour la binarisation, nous obtenons une image comportant la forme de l'oeil au bon endroit.
+Nous pouvons alors calculer le barycentre de la forme obtenu afin de récupérer le centre de l'oeil.
 
 \begin{figure}[H]
  \center
