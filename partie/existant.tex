@@ -1,7 +1,25 @@
 \section{Application existante}
 
+\subsection{Présentation de l'application}
+L'application sur laquelle nous travaillons est écrite en C++ avec l'utilisation de QtCreator. Le 
+programme a été développé par l'équipe Fox et par des étudiants. Cette application il a fait 
+l'objet de divers améliorations auparavant.\\
+
 \subsection{Architecture}
-%TODO revoir le modèle de couche et mettre shéma
+L'application fournis est orientée objet, celle-ci est découpé en Business Objects\footnote{les objets 
+métier s'occuppent d'une tâche précise}. Ces Business Objects sont hiérarchisé dans une pyramide, les 
+objets métiers en haut de cette pyramide sont les plus abstrés et utilise les resultats de l'étages infèrieur. 
+Les objets métiers en bas de la pyramide sont les plus proche du flux vidéo brut.
+
+%TODO explications des couche
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=12cm]{image/pyramide.png}
+  \caption{Processus d'extraction des informations pyramidal sur le flux vidéo}
+\end{figure}
+
+%TODO explications de notre couche
 
 \subsection{Reconnaissance du visage : Viola et Jones}
 L'application est divisée en deux parties. La première recherche le visage grâce à
