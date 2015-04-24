@@ -2,26 +2,29 @@
 %\addcontentsline{toc}{section}{Introduction}
 
 % Préambule
-Durant nos études de master informatique à l'université de Lille 1,
-nous avons l'occasion de participer à un projet proposé par une équipe de
-recherche. Cette expérience a pour but de nous faire découvrir le
-milieu de la recherche.\\
+%Durant nos études de master informatique à l'université de Lille 1,
+%nous avons l'occasion de participer à un projet proposé par une équipe de
+%recherche. Cette expérience a pour but de nous faire découvrir le
+%milieu de la recherche.\\
+Pour nos études en master informatique, nous participons à un projet proposé par une 
+équipe de recherche. Cela nous permet de décourvir le milieu de la recherche.
 
 % Introduction
-L'application sur laquelle nous allons travailler permet de localiser le visage
+L'application sur laquelle nous travaillons permet de localiser le visage
 d'un individu au travers d'un flux vidéo afin de reconnaitre sur celui-ci différente
-émotion comme la fatigue ou encore l'intérêt de la personne pour quelque chose. Ce procédé
+émotion comme la fatigue ou encore l'intérêt de la personne pour différents sujets. Ce procédé
 se démocratise et il est de plus en plus utilisé dans des applications dans le domaine : 
 \begin{itemize}
- \item de la sécurité, ce qui permettrai de détecter des comportements inhabituel d'un individu.
+ \item de la sécurité, ce qui permettrai de détecter des comportements inhabituel chez un individu.
  \item du loisir, pour les jeux vidéo ou encore pour une intéraction plus intuitif avec un ordinateur.
  \item de la publicité, pour que celle-ci corresponde au besoin des individu. 
 \end{itemize}
 \ \\
-Ce type d'application utilise différent type de technologie, mais celle-ci sont souvent très intrusifs 
-et demande à l'utilisateur de mettre un casque ou tout autre appareil du même type. Les applications plus 
-moderne effectue des algorithmes de reconnaissance de forme, tel que l'algorithme de viola et Jones, dans 
-le but de détecter un visage à partir de simple caméra. Cela permet de mieu intégrer ce type d'application 
+Ce type d'application utilise différentes technologies, mais celle-ci sont souvent trop intrusifs 
+et demande à l'utilisateur d'utiliser du materiel assez spécifique. Or le but des algorithmes actuel
+est de faire en sorte que l'utilisateur ne se rende même pas compte qu'il utilise ce type de technologie. Les applications plus 
+moderne effectue des algorithmes de reconnaissance de forme, tel que l'algorithme de Viola et Jones, dans 
+le but de détecter un visage à partir de simple caméra. Cela permet de mieu intégrer ces applications 
 afin qu'il n'y est aucune contrainte pour l'utilisateur.\\
 
 L'objectif de l'application sur lequel nous travaillons est de détecter les mouvements
@@ -43,9 +46,9 @@ des applications temps réel, ce qui permet d'avoir un niveau de réactivité tr
 
 Le projet sur lequel nous travaillons est basé sur les travaux d'anciens étudiants qui se sont concentrés sur la
 détection de visage et des yeux. Une première approche de la reconnaissance d'émotion sur une vidéo a été 
-réalisé par les étudiant précédent, cependant elle n'est pas finalisé. Le projet est une application temps réel, dont les flux vidéo peuvent 
-provenir de vidéos enregistrées ou d'une caméra type webcam. Nos travaux pourront être utilisé par
-l'équipe dans d'autre application de reconnaissance d'émotions sur lesquels ils effectue leur recherche.\\
+réalisé par les chercheurs de l'équipe, mais elle n'est pas encore optimal. Le projet est une application temps réel, 
+dont les flux vidéo peuvent provenir de vidéos enregistrées ou d'une caméra type webcam. Nos travaux pourront être utilisé par
+l'équipe dans d'autre application de reconnaissance d'émotions sur lesquels ils effectuent leur recherche.\\
 
 % Problème
 \subsection{Problèmatique de l'existant}
@@ -74,11 +77,11 @@ lors des traitements.\\
 
 % Objectifs
 \subsection{Objectif du projet}
-Pour palier à ces différentes problèmatique, nous avons besoin de parfaitement localiser le centre des
-yeux. Pour cela, il existe différent algorithme permettant de détecter des contours. Lorsque nous aurons
+Pour résoudre ces différentes problèmatiques, nous avons besoin de parfaitement localiser le centre des
+yeux. Pour cela, il existe différent algorithme de détection de contours dans une image. Lorsque nous aurons
 détecter les contours des yeux, il nous sera alors possbile de calculer le centre de la forme
-que nous aurons détecté. Les algorithmes de reconnaissance de forme ont besoin, pour effectuer leur traitement,
-d'une image binaire contenant la forme. Il nous faut donc déterminer quels sont les traitements à effectuer
+que nous aurons détecté. Les algorithmes de détection de forme ont besoin, pour effectuer leur traitement,
+d'une image binaire. Il nous faut donc déterminer quels sont les traitements à effectuer
 sur l'image d'origine récupéré par l'application afin de bien faire ressortir la forme d'un oeil. L'image
 sur laquelle nous travaillons est une image de la zone péri-oculaire de l'utilisateur, qui est calculé par
 l'algorithme actuel de l'application. Nous allons donc utiliser l'algorithme actuelle afin d'affiner la localisation
