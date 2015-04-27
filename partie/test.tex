@@ -3,18 +3,18 @@
 \subsection{L'algorithme de Canny}
 
 \subsubsection{Version de base}
-Le filtre de Canny a été créé en 1986 dans le but d'améliorer les résultat du filtre de Sobel.
+Le filtre de Canny a été créé en 1986 dans le but d'améliorer les résultats du filtre de Sobel.
 Le principe du filtre est d'utiliser deux seuils, un seuil haut et un seuil bas. L'algorithme
-commence par séléctionner les pixels supérieurs au seuil haut, puis recherche à partir de chaque
-pixels au dessus du seuil haut les pixels qui sont au dessus du seuil bas dans son voisinage. 
+commence par sélectionner les pixels supérieurs au seuil haut, puis recherche à partir de chaque
+pixel en dessous du seuil haut les pixels qui sont au-dessus du seuil bas dans son voisinage. 
 Chaque voisin qui est entre les deux seuils appartient à un contour, on passe donc sa valeur à
 255 pour le prendre en compte dans celui-ci. Ainsi on voit 
-que cet algorithme prend en compte deux caractèristiques, l'intensité et la direction du
+que cet algorithme prend en compte deux caractéristiques, l'intensité et la direction du
 gradient de l'image.\\
 
-Nous utilisons cette algorithme dans les régions autour des yeux afin de délimiter le contour
+Nous utilisons cet algorithme dans les régions autour des yeux afin de délimiter le contour
 de chaque oeil. Le résultat permet de faire ressortir l'oeil, mais aussi les sourcils et certaines
-ombres présentent dans le creu de l'oeil. Ce filtre permet donc de détecter les contours des yeux,
+ombres présentent dans le creux de l'oeil. Ce filtre permet donc de détecter les contours des yeux,
 mais le résultat comporte soit beaucoup de bruit, soit trop peu de détails. Dans un premier
 temps, pour obtenir un seuil adaptatif, nous prenons la moyenne des pixels.
 
@@ -25,13 +25,14 @@ temps, pour obtenir un seuil adaptatif, nous prenons la moyenne des pixels.
  \caption{Image de test et résultat de l'algorithme de Canny avec une moyenne des pixels}
 \end{figure}
 
-On voit que cette méthode, n'est pas optimal et supprime beaucoup trop d'information. De plus,
-l'algorithme prend beaucoup trop en compte les ombres présentent dans l'image.
+On voit que cette méthode, n'est pas optimale et supprime trop d'informations. De plus,
+l'algorithme prend beaucoup trop en compte les ombres présentes dans l'image. Nous utilisons
+donc une autre méthode permettant de mieux détecter les contours dans les zones que nous souhaitons.
 
 \subsubsection{Avec une moyenne de pixels sur des parties d'image}
 
-Plutôt, que de prendre la moyenne sur l'image de la zone périoculaire, nous segmentons l'image
-en plusieurs zones dans lesquel nous calculons la moyenne et ou nous effectuons l'algorithme
+Plutôt, que de prendre la moyenne des pixels sur l'ensemble de l'image de la zone péri-oculaire, nous segmentons l'image
+en plusieurs zones dans lesquels nous calculons la moyenne et où nous effectuons l'algorithme
 de Canny.
 
 \begin{figure}[H]
@@ -41,10 +42,11 @@ de Canny.
  \caption{Image de test et résultat de l'algorithme de Canny avec division de l'image en 16}
 \end{figure}
 
-Avec cette méthode, nous obtenons une image bruité avec les bords de chaque rectangle utilisé
+Avec cette méthode, nous obtenons une image bruité avec les bords de chaque rectangle utilisés
 pour le calcul précédent, car l'algorithme de Canny ne prend pas en compte les bords de l'image
 qu'il traite. Avec ce bruit nous ne pouvons clairement pas effectuer une recherche de l'oeil dans
-l'image.
+l'image. Il nous faut donc trouver une solution pour supprimer les traits présents dans l'image
+sans supprimer les contours présents dans l'image résultante.
 
 \subsection{Ouverture des sous-images}
 
