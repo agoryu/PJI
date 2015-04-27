@@ -50,19 +50,21 @@ sans supprimer les contours présents dans l'image résultante.
 
 \subsection{Ouverture des sous-images}
 
-La dilatation d'une image est une opération morphologique\footnote{filtre non-linéaire} qui utilise 
+La dilatation d'une image est une opération morphologique\footnote{filtre non linéaire} qui utilise 
 un élément structurant afin d'effectuer une convolution de l'image. Si l'un des voisins du pixel traité
-est blanc alors celui-ci sera blanc, sinon il sera noire.
-Cette opération à en général pour effet d'élargir une forme et de combler les trous qui peut y avoir
-dans cette forme. Nous avons également l'opération inverse qui est l'érosion, qui va rétrécire la forme.
-Lorsqu'une dilatation est effectué sur une image en niveau de gris, le pixel traité prend la valeur maximum parmi
-ces voisins, et le minimum pour la dilatation.\\
+est blanc alors celui-ci sera blanc, sinon il sera noir.
+Cette opération a, en général, pour effet d'élargir une forme et de combler les trous qui peuvent être présent
+dans cette forme. Nous avons également l'opération inverse qui est l'érosion, qui va diminuer la surface de la forme.
+Lorsqu'une dilatation est effectuée sur une image en niveau de gris, le pixel traité prend la valeur maximum parmi
+ses voisins, et le minimum pour la dilatation.\\
 
-L'ouverture est la combinaison des deux opérations morphologique vu précédemment, en commençant par 
-l'érosion puis la dilatation. Cela à pour effet de fusionner des formes si elles sont proches (dans ce
-cas il y a des chances que se soit la même forme) et de diminuer la largeur de la forme pour 
-s'approcher de la forme réel. Afin de supprimer le bruit présent dans le résultat précédent nous effectuons une ouverture
-de chaque sous-image.
+L'ouverture est la combinaison des deux opérations morphologiques vues précédemment, en commençant par 
+l'érosion puis la dilatation. Cela a pour effet de fusionner des formes si elles sont proches (dans ce
+cas il y a des chances que ce soit la même forme) et de diminuer la largeur de la forme pour 
+s'approcher de la forme réel.\\ 
+
+Afin de supprimer le bruit présent dans l'image de l'oeil après utilisation du filtre de Canny, nous effectuons une ouverture
+de chaque sous image.
 
 \begin{figure}[H]
  \center
@@ -72,10 +74,10 @@ de chaque sous-image.
 \end{figure}
 
 Grâce à ce procédé, nous obtenons une image sans la grille que nous avions précédemment. Cependant,
-le bruit du aux ombres et au ride ne permet pas encore d'effectuer un algorithme de détection de forme
-sur l'oeil. Afin de supprimer les bruits du aux ombres presentent dans l'image, nous décidons de travailler sur d'autre modèle
-colorimètrique comme le HSV\footnote{Hue Saturation Value} dont la composante \enquote{saturation} peut nous
-permettre de diminuer l'ombre de l'image.
+le bruit du aux ombres et aux rides ne permet pas encore d'effectuer un algorithme de détection de forme
+pour la localisation de l'oeil. Afin de supprimer les bruits du aux ombres présentent dans l'image, nous décidons de travailler sur d'autre modèle
+colorimétrique comme le HSV\footnote{Hue Saturation Value} dont la composante \enquote{saturation} peut nous
+permettre de ne plus prendre en compte les changements importants de luminance.
 
 \subsection{Les modèles Colorimètrique}
 \subsubsection{Le modèle HSV}
