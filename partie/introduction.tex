@@ -2,13 +2,17 @@
 %\addcontentsline{toc}{section}{Introduction}
 
 Pour nos études en master informatique, nous participons à un projet proposé par une 
-équipe de recherche. Cela nous permet de découvrir le milieu de la recherche.
+équipe de recherche. Cela nous permet de découvrir le milieu de la recherche. Nous avons
+sélectionné ce projet, car les connaissances qu'il requiert correspondent à ce qui sera
+vu dans le master auquel nous avons postulé, c'est-à-dire le master IVI. Ainsi, nous 
+consolidons les connaissances que nous acquérons durant les options enseigné par ce 
+master.\\
 
 % Introduction
 L'application sur laquelle nous travaillons permet de localiser le visage
-d'un individu au travers d'un flux vidéo afin de reconnaitre sur celui-ci différente
-émotion comme la fatigue ou encore l'intérêt de la personne pour différents sujets. Ce procédé
-se démocratise et il est de plus en plus utilisé dans des applications dans le domaine : 
+d'un individu au travers d'un flux vidéo.
+%afin de reconnaitre sur celui-ci différente émotion comme la fatigue ou encore l'intérêt de la personne pour différents sujets. 
+Ce procédé se démocratise et il est de plus en plus utilisé dans des applications dans le domaine : 
 \begin{itemize}
  \item de la sécurité, ce qui permettrait de détecter des comportements inhabituels chez un individu.
  \item du loisir, pour les jeux vidéo ou encore pour une interaction plus intuitive avec un ordinateur.
@@ -40,10 +44,14 @@ reconnaissance de personnes. La grande majorité de leurs travaux sont
 des applications temps réel, ce qui permet d'avoir un niveau de réactivité très élevé.\\ 
 
 Le projet sur lequel nous travaillons est basé sur les travaux des membres de l'équipe qui se sont concentrés sur la
-détection de visage et des yeux. Une première approche de la reconnaissance d'émotions sur une vidéo a été 
-réalisé par les chercheurs de l'équipe, mais elle n'est pas encore optimale. Le projet est une application temps réel, 
-dont les flux vidéo peuvent provenir de vidéos enregistrées ou d'une caméra type webcam. Nos travaux pourront être utilisés par
-l'équipe dans d'autres applications de reconnaissance d'émotions sur lesquels ils effectuent leur recherche.\\
+détection de visage et des yeux. Cette détection permet ensuite de normaliser le visage, c'est-à-dire
+d'avoir une image statique contenant ce visage afin de réaliser des traitements sur cette image. C'est
+traitement peuvent par exemple être la détection de la fatigue ou de la concentration d'un individu.
+
+%Une première approche de la reconnaissance d'émotions sur une vidéo a été 
+%réalisé par les chercheurs de l'équipe, mais elle n'est pas encore optimale. Le projet est une application temps réel, 
+%dont les flux vidéo peuvent provenir de vidéos enregistrées ou d'une caméra type webcam. Nos travaux pourront être utilisés par
+%l'équipe dans d'autres applications de reconnaissance d'émotions sur lesquels ils effectuent leur recherche.\\
 
 % Problème
 \subsection{Problèmatique de l'existant}
@@ -52,23 +60,25 @@ Les algorithmes utilisés dans l'application sont limités et ne permettent pas 
 dans toutes les situations d'une application temps réel. De nombreux cas ne sont
 pas traités dans ce type d'algorithme comme par exemple l'orientation du visage. Lorsque
 l'utilisateur effectue une rotation de la tête, les algorithmes utilisés ne sont pas capables
-de suivre ce mouvement. Il faut donc être capable, grâce à différents axes présents dans le visage, de détecter
+de suivre ce mouvement. Il faut donc, grâce à différents axes présents dans le visage, détecter
 ce mouvement afin de garder une région d'intérêt correcte pour les traitements suivants.\\
 
 %les yeux fermés
 Actuellement l'application n'arrive pas à suivre un visage dont les yeux sont fermés. En effet,
 l'algorithme de Viola et Jones repose sur la localisation de plusieurs points du visage, dont 
-les yeux sont les points les plus importants. Cela implique que si une personne cligne des yeux
+les yeux sont les points les plus importants. Si l'un des deux yeux est absent ou fermé, l'algorithme 
+à moins de chance de détecter le visage. Cela implique que si une personne cligne des yeux
 l'application a des difficultées pour retrouver le visage pour la suite des traitements et cela 
-cause de nombreuses erreurs. Il n'est donc actuellement pas possible de reconnaître des émotions
-sur le visage lorsque celui-ci ferme les yeux.\\
+cause de nombreuses erreurs.\\
 
 %stabilité des centres des yeux
 De plus, les points représentant le centre des yeux ne sont pas parfaitement stables. Ce décalage a de 
-nombreuses conséquences sur la reconnaissance d'émotion effectuée par l'application, car pour effectuer
-ce traitement, l'application se base sur les ombres provoquées par le mouvement de certains muscles du 
+nombreuses conséquences sur les traitements effectués par l'application, car l'application se base sur 
+les ombres provoquées par le mouvement de certains muscles du 
 visage. Il est donc primordial que la position de ces muscles soit stable, pour ne pas les confondre
-lors des traitements.\\
+lors des traitements. Et pour cela il faut que l'image normalisé du visage soit stable.\\
+
+%TODO contrainte du a la qualité de la vidéo
 
 % Objectifs
 \subsection{Objectif du projet}
