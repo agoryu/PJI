@@ -41,8 +41,9 @@ afin de mieux détecter les contours dans les zones que nous souhaitons.
 \subsubsection{Avec une moyenne de pixels sur des parties d'image}
 
 Plutôt, que de prendre la moyenne des pixels sur l'ensemble de l'image de la zone péri-oculaire, nous segmentons l'image
-en plusieurs zones dans lesquels nous calculons la moyenne et où nous effectuons l'algorithme
-de Canny.
+en plusieurs zones dans lesquels nous calculons la moyenne. Puis nous effectuons l'algorithme
+de Canny sur chacune de ces zones. Le résultat nous fournit bien une image dans laquelle l'oeil
+est détecté.
 
 \begin{figure}[H]
  \center
@@ -53,19 +54,22 @@ de Canny.
 
 Avec cette méthode, nous obtenons une image bruité avec les bords de chaque rectangle utilisés
 pour le calcul précédent, car l'algorithme de Canny ne prend pas en compte les bords de l'image
-qu'il traite. Avec ce bruit nous ne pouvons clairement pas effectuer une recherche de l'oeil dans
-l'image. Il nous faut donc trouver une solution pour supprimer les traits présents dans l'image
+qu'il traite. Avec ce bruit nous ne pouvons pas effectuer une recherche de l'oeil dans
+l'image. Il nous faut donc trouver une solution pour supprimer les traits
 sans supprimer les contours présents dans l'image résultante.
 
 \subsection{Ouverture des sous-images}
+
+Pour résoudre le problème précédent, nous utilisons deux opération morphogique qui sont
+la dilatation et l'érosion d'une image.\\
 
 La dilatation d'une image est une opération morphologique\footnote{filtre non linéaire} qui utilise 
 un élément structurant afin d'effectuer une convolution de l'image. Si l'un des voisins du pixel traité
 est blanc alors celui-ci sera blanc, sinon il sera noir.
 Cette opération a, en général, pour effet d'élargir une forme et de combler les trous qui peuvent être présent
-dans cette forme. Nous avons également l'opération inverse qui est l'érosion, qui va diminuer la surface de la forme.
+dans celle-ci. Nous avons également l'opération inverse qui est l'érosion, qui va diminuer la surface de la forme.
 Lorsqu'une dilatation est effectuée sur une image en niveau de gris, le pixel traité prend la valeur maximum parmi
-ses voisins, et le minimum pour la dilatation.\\
+ses voisins, et le minimum pour l'érosion.\\
 
 L'ouverture est la combinaison des deux opérations morphologiques vues précédemment, en commençant par 
 l'érosion puis la dilatation. Cela a pour effet de fusionner des formes si elles sont proches (dans ce
@@ -83,20 +87,24 @@ de chaque sous image.
 \end{figure}
 
 Grâce à ce procédé, nous obtenons une image sans la grille que nous avions précédemment. Cependant,
-le bruit du aux ombres et aux rides ne permet pas encore d'effectuer un algorithme de détection de forme
-pour la localisation de l'oeil. Afin de supprimer les bruits du aux ombres présentent dans l'image, nous décidons de travailler sur d'autre modèle
+le bruit du aux ombres et aux rides ne permet pas encore d'effectuer des traitement pour localiser le centre de l'oeil.
+Nous avons un second problème qui est la couleur de peau de l'utilisateur. Nous avons appliqué notre méthode 
+sur des personnes ayant des couleurs de peau différentes et les résultats n'étaient pas exploitable (voir annexe p\pageref{resultCanny}).\\ 
+
+Afin de supprimer les bruits du aux ombres présentent dans l'image, nous décidons de travailler sur d'autre modèle
 colorimétrique comme le HSV\footnote{Hue Saturation Value} dont la composante \enquote{saturation} peut nous
 permettre de ne plus prendre en compte les changements importants de luminance.
 
 \subsection{Les modèles Colorimètrique}
+Un modèle colorimètrique est une façon de représenter numériquement les couleurs. En général on sépare ces valeurs en trois groupe, les canaux.
+Le modèle colorimètrique le plus connus est le RGB, où on retrouve les canaux rouge, vert et bleu. Les canaux peuvent porter
+d'autre information comme nous allons le voir dans la suite.
+
 \subsubsection{Le modèle HSV}
 Le modèle colorimètrique HSV est composé de la teinte\footnote{Hue}, la saturation\footnote{Saturation} et la valeur\footnote{Value}.
-La teinte correspond à la forme la plus pur des couleurs. La saturation est l'intensité de la couleur, plus cette valeur est faible
-et plus la couleur semble fade. Et enfin la valeur correspond à la luminosité de la couleur, plus cette valeur est petite et plus la
-couleur est sombre.\\
-
-Nous avons essayé de décomposer l'image dans les trois canaux de HSV sur notre image de test. Nous pensons pouvoir
-utiliser la composante saturation afin de de ne plus avoir le problème des ombres qui doivent être représenté dans la composante valeur.
+La \textit{teinte} correspond à la forme la plus pur des couleurs. La \textit{saturation} est l'intensité de la couleur, plus cette valeur est faible
+et plus la couleur semble fade. Et enfin la \textit{valeur} correspond à la luminosité de la couleur, plus cette valeur est petite et plus la
+couleur est sombre.
 
 \begin{figure}[H]
  \center
@@ -106,7 +114,18 @@ utiliser la composante saturation afin de de ne plus avoir le problème des ombr
  \caption{Décomposition du modèle HSV}
 \end{figure}
 
-Nous pouvons voir que la saturation est initulisable tel quel, car les valeurs sont beaucoup trop basse et trop proche.
+Etant donné que notre problème actuel est l'ombre présente dans l'image, nous séparons les trois canaux du modèle HSV. Cela
+nous permet de garder la plus approprié pour nos traitement. Nous ne prendrons pas le troisième canal puisqu'il représente 
+la luminosité et que notre problème actuel est du aux ombres présentent dans l'image. Le canal le plus approprié serait la \textit{saturation}. 
+Malheureusement, lorsque nous appliquons le filtre de Canny sur ce canal, le résultat ne nous permet pas de détecter l'oeil.
+
+\begin{figure}[H]
+ \center
+ \includegraphics[width=3cm]{image/cannySaturation.png}
+ \caption{Résultat du filtre de Canny sur le canal saturation}
+\end{figure}
+
+%Nous pouvons voir que la saturation est initulisable tel quel, car les valeurs sont beaucoup trop basse et trop proche.
 
 % %TODO explication hsv Gaetan
 % 
