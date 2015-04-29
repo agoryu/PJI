@@ -1,6 +1,9 @@
 \section{Recherche de solution}
 
 \subsection{L'algorithme de Canny}
+La première solution que nous testons est le filtre de Canny. Nous avons pu voir ce filtre durant
+nos cours et nous trouvons que c'est une piste intéressante, car cette algorithme détecte les contours
+présents dans une image.
 
 \subsubsection{Version de base}
 Le filtre de Canny a été créé en 1986 dans le but d'améliorer les résultats du filtre de Sobel.
@@ -8,15 +11,21 @@ Le principe du filtre est d'utiliser deux seuils, un seuil haut et un seuil bas.
 commence par sélectionner les pixels supérieurs au seuil haut, puis recherche à partir de chaque
 pixel en dessous du seuil haut les pixels qui sont au-dessus du seuil bas dans son voisinage. 
 Chaque voisin qui est entre les deux seuils appartient à un contour, on passe donc sa valeur à
-255 pour le prendre en compte dans celui-ci. Ainsi on voit 
-que cet algorithme prend en compte deux caractéristiques, l'intensité et la direction du
-gradient de l'image.\\
+255 pour le prendre en compte dans celui-ci.\\ 
+%Ainsi on voit que cet algorithme prend en compte deux caractéristiques, l'intensité et la direction du
+%gradient de l'image.\\
 
 Nous utilisons cet algorithme dans les régions autour des yeux afin de délimiter le contour
-de chaque oeil. Le résultat permet de faire ressortir l'oeil, mais aussi les sourcils et certaines
-ombres présentent dans le creux de l'oeil. Ce filtre permet donc de détecter les contours des yeux,
-mais le résultat comporte soit beaucoup de bruit, soit trop peu de détails. Dans un premier
-temps, pour obtenir un seuil adaptatif, nous prenons la moyenne des pixels.
+de chaque oeil. Nous testons cette algorithme avec différent seuil afin de voir si celui-ci
+peut être intéressant dans notre situation. On voit sur les résultat que si le seuil est trop
+bas l'oeil n'est pas détecter, et si le seuil est trop haut les rides de la personne dans la vidéo
+apparaissent. Afin d'avoir un seuil adaptatif, nous prenons la valeur moyenne des pixels de l'image, ce
+qui nous donne un résultat où le sourcil apparait et ou une partie de l'oeil est détecté.
+
+%Le résultat permet de faire ressortir l'oeil, mais aussi les sourcils et certaines
+%ombres présentent dans le creux de l'oeil. Ce filtre permet donc de détecter les contours des yeux,
+%mais le résultat comporte soit beaucoup de bruit, soit trop peu de détails. Dans un premier
+%temps, pour obtenir un seuil adaptatif, nous prenons la moyenne des pixels.
 
 \begin{figure}[H]
  \center
@@ -26,8 +35,8 @@ temps, pour obtenir un seuil adaptatif, nous prenons la moyenne des pixels.
 \end{figure}
 
 On voit que cette méthode, n'est pas optimale et supprime trop d'informations. De plus,
-l'algorithme prend beaucoup trop en compte les ombres présentes dans l'image. Nous utilisons
-donc une autre méthode permettant de mieux détecter les contours dans les zones que nous souhaitons.
+l'algorithme prend en compte les ombres présentes dans l'image. Nous devons adapté cette méthode
+afin de mieux détecter les contours dans les zones que nous souhaitons.
 
 \subsubsection{Avec une moyenne de pixels sur des parties d'image}
 

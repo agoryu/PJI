@@ -76,27 +76,42 @@ De plus, les points représentant le centre des yeux ne sont pas parfaitement st
 nombreuses conséquences sur les traitements effectués par l'application, car l'application se base sur 
 les ombres provoquées par le mouvement de certains muscles du 
 visage. Il est donc primordial que la position de ces muscles soit stable, pour ne pas les confondre
-lors des traitements. Et pour cela il faut que l'image normalisé du visage soit stable.\\
+lors des traitements. Et pour cela il faut que l'image normalisé du visage soit stable, afin que l'image
+du visage soit invariant au changement de repère.\\
 
 %TODO contrainte du a la qualité de la vidéo
+La qualité de la vidéo et sa taille peuvent également être problèmatique dans les traitements. Afin de
+pouvoir valider nos travaux, nous avons accès à une base de vidéo possèdant les véritables points
+du centre de l'oeil. Malheureusement, ces vidéos sont relativement ancienne, la qualité n'est pas 
+très bonne et elles sont plus petite que les vidéos sur lesquels l'application a été testé. Les 
+calcules actuel du centre de l'oeil ne fonctionne pas très bien sur ces vidéos.\\
+
+Il est donc important de remédier à ces différentes problèmatique, car l'ensemble des applications
+de l'équipe FOX reposent sur cette normalisation du visage.
 
 % Objectifs
 \subsection{Objectif du projet}
-Pour résoudre ces différentes problématiques, nous avons besoin de parfaitement localiser le centre des
-yeux. Pour cela, il existe différents algorithmes de détection de contours dans une image. Lorsque nous aurons
-détecté les contours des yeux, il nous sera alors possible de calculer le centre de la forme
-que nous aurons détecté. Les algorithmes de détection de forme ont besoin, pour effectuer leur traitement,
-d'une image binaire. Il nous faut donc déterminer quels sont les traitements à effectuer
-sur l'image d'origine récupérée par l'application afin de bien faire ressortir la forme d'un oeil. L'image
-sur laquelle nous travaillons est une image de la zone péri-oculaire de l'utilisateur, qui est calculé par
-l'algorithme actuel de l'application. Nous allons donc utiliser l'algorithme actuel afin d'affiner la localisation
-du centre de l'oeil.\\
+%Pour résoudre ces différentes problématiques, nous avons besoin de parfaitement localiser le centre des
+%yeux.\\
+% Pour cela, il existe différents algorithmes de détection de contours dans une image. Lorsque nous aurons
+% détecté les contours des yeux, il nous sera alors possible de calculer le centre de la forme
+% que nous aurons détecté. Les algorithmes de détection de forme ont besoin, pour effectuer leur traitement,
+% d'une image binaire. Il nous faut donc déterminer quels sont les traitements à effectuer
+% sur l'image d'origine récupérée par l'application afin de bien faire ressortir la forme d'un oeil. L'image
+% sur laquelle nous travaillons est une image de la zone péri-oculaire de l'utilisateur, qui est calculé par
+% l'algorithme actuel de l'application. Nous allons donc utiliser l'algorithme actuel afin d'affiner la localisation
+% du centre de l'oeil.\\
+
+Le première objectif est donc de stabiliser la position du centre de l'oeil, afin d'avoir une normalisation de l'image
+totalement stable. Pour cela nous utilisons les calcules précédents afin de récupérer une ROI de la zone péri-oculaire, puis
+nous affinons la localisation du centre de l'oeil avec de nouveau traitement.\\
 
 Le second objectif est de calculer le centre de l'oeil lorsque celui-ci est fermé. Cette étape est plus complexe,
 car contrairement à un oeil ouvert, l'oeil fermé à la même couleur que la peau. Il faut donc réussir à différencier ces
-deux situations afin d'appliquer le bon traitement. Une première approche lors de la détection de l'oeil fermé est 
-de travailler avec des filtres qui détectent des textures. L'idée est que la pupille a une texture différente de celle 
-du reste du visage.\\
+deux situations afin d'appliquer le bon traitement.\\ 
+%Une première approche lors de la détection de l'oeil fermé est 
+%de travailler avec des filtres qui détectent des textures. L'idée est que la pupille a une texture différente de celle 
+%du reste du visage.\\
 
 Pour répondre aux problématiques du projet, nous allons d'abord voir la structure actuelle du projet, ainsi que les algorithmes
 utilisés. Puis, nous détaillerons nos démarches pour résoudre les problématiques et nous expliquerons la solution finale que nous avons
