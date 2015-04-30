@@ -195,24 +195,24 @@ soit la luminosité de la vidéo.
 \subsection{Seuil pour la binarisation de l'image}
 
 
-%TODO calcul du barycentre
-\subsection{Détection des contours avec des blobs} %TODO titre à revoir
+\subsection{Sélection de composantes convexes avec des blobs}
 Maintenant que nous obtenons une image binarisé comportant la forme de l'oeil, nous pouvons déterminer ou est
-positionné le centre de l'oeil. Pour cela nous avons choisi l'utilisation de blob afin de résoudre un second 
+positionné son centre. Pour cela nous avons choisi l'utilisation de blob afin de résoudre un second 
 problème que nous avons rencontré. Lorsque nous effectuons les traitements précédent sur la vidéo, nous avons
 parfois des éléments qui perturbe la détection de contour comme des montures de lunette ou les cheveux de la personne 
-filmé. Ces éléments peuvent faire partie des formes que nous récupérons lors de la binarisation. Les blobs
-sont des objets qui vont détecter des formes dans une image, mais il est possible d'ajouter des caractèristiques
-à ces blobs afin de récupérer seulement les formes qui possède ces caractèristiques.\\
+filmé. Ces éléments peuvent faire partie des formes que nous récupérons lors de la binarisation.\\ 
 
-Les blobs sont des éléments formé à partir d'une courbe 3D des fréquences d'une image.
-%TODO en attente de la réinstallation scilab pour afficher des images pour les explication
+Les blobs nous permettent d'étiqueté chaque composantes convexes présentent dans l'image en annotant
+chaque pixels de celle-ci. Si un pixel n'a aucun voisin d'annoté on lui donne un nouveau numéro et si
+l'un de ces voisins est annoté alors il prend le numéro de ce voisin. Nous obtenons ainsi des enveloppes
+convexe sur lesquel nous vérifions qu'elles respectent bien certaines contrainte.\\
 
-Pour obtenir les blobs correspondant au yeux nous avons utilisé les paramètres :
+Dans notre cas nous avons posé les conditions suivantes :
 \begin{itemize}
- \item la convexité : les yeux étant censé être une forme ovale, il ne devrait pas y'avoir de segment, entre 
- deux points, qui dépasse de la forme.
- \item l'aire de la forme : ce qui permet de ne pas prendre en compte les formes plus petites.
- \item la circularité de la forme : ce qui permet de ne pas prendre en compte les formes longue comme les cheveux
- sur le côté du visage.
+ \item Le blob de l'oeil est censé être convexe, il ne devrait donc pas y avoir de trous dans le blob
+ \item S'il y a plusieurs blobs alors l'oeil devrait être celui qui est le plus proche du centre étant
+ donné que la ROI doit être centré sur l'oeil.
 \end{itemize}
+Ces conditions nous permettent de supprimer les éléments perturbateur qui étaient présent dans l'image binaire.
+Nous obtenons donc une forme représentant l'oeil, il suffit maintenant de calculer le centre de cette forme
+pour obtenir la localisation du centre de l'oeil. Pour cela nous utilisons le calcul du barycentre.
