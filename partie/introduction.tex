@@ -60,15 +60,6 @@ l'utilisateur effectue une rotation de la tête, les algorithmes utilisés ne so
 de suivre ce mouvement. Il faut donc, grâce à différents axes présents dans le visage, détecter
 ce mouvement afin de garder une région d'intérêt correcte pour les traitements suivants.\\
 
-%les yeux fermés
-%pas viola jones mais application qui galere
-Actuellement l'application n'arrive pas à suivre un visage dont les yeux sont fermés. En effet,
-l'algorithme de Viola et Jones repose sur la localisation de plusieurs points du visage, dont 
-les yeux sont les points les plus importants. Si l'un des deux yeux est absent ou fermé, l'algorithme 
-à moins de chance de détecter le visage. Cela implique que si une personne cligne des yeux
-l'application a des difficultées pour retrouver le visage pour la suite des traitements et cela 
-cause de nombreuses erreurs.\\
-
 %stabilité des centres des yeux
 De plus, les points représentant le centre des yeux ne sont pas parfaitement stables. Ce décalage a de 
 nombreuses conséquences sur les traitements effectués par l'application, car l'application se base sur 
@@ -77,7 +68,18 @@ visage. Il est donc primordial que la position de ces muscles soit stable, pour 
 lors des traitements. Et pour cela il faut que l'image normalisé du visage soit stable, afin que l'image
 du visage soit invariant au changement de repère.\\
 
-%TODO contrainte du a la qualité de la vidéo
+%les yeux fermés
+%pas viola jones mais application qui galere
+Actuellement l'application n'arrive pas à localiser le centre des yeux lorsque ceux-ci sont fermé. 
+Cela implique que la normalisation du visage ne se fait pas correctement et que les points du
+visage servant à faire des traitement ne sont pas parfaitement stable.\\
+% En effet,
+% l'algorithme de Viola et Jones repose sur la localisation de plusieurs points du visage, dont 
+% les yeux sont les points les plus importants. Si l'un des deux yeux est absent ou fermé, l'algorithme 
+% à moins de chance de détecter le visage. Cela implique que si une personne cligne des yeux
+% l'application a des difficultées pour retrouver le visage pour la suite des traitements et cela 
+% cause de nombreuses erreurs.\\
+
 La qualité de la vidéo et sa taille peuvent également être problèmatique dans les traitements. Afin de
 pouvoir valider nos travaux, nous avons accès à une base de vidéo possèdant les véritables points
 du centre de l'oeil. Malheureusement, ces vidéos sont relativement ancienne, la qualité n'est pas 
@@ -91,7 +93,7 @@ important de remédier à ces différentes problèmatiques.\\
 \subsection{Objectif du projet}
 
 Le première objectif est donc de stabiliser la position du centre de l'oeil, afin d'avoir une normalisation de l'image
-totalement stable. Pour cela nous utilisons les calcules précédents afin de récupérer une ROI de la zone péri-oculaire, puis
+totalement stable. Pour cela nous utilisons les calcules réalisé précédement par l'équipe afin de récupérer une ROI de la zone péri-oculaire. Puis
 nous affinons la localisation du centre de l'oeil avec de nouveau traitement.\\
 
 Le second objectif est de calculer le centre de l'oeil lorsque celui-ci est fermé. Cette étape est plus complexe,
