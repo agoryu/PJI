@@ -2,24 +2,35 @@
 
 \subsection{Présentation de l'application}
 L'application sur laquelle nous travaillons est écrite en C++ avec l'utilisation de QtCreator. Le 
-programme a été développé par l'équipe Fox et par des étudiants. Cette application il a fait 
+programme a été développé par les membres de l'équipe Fox. Cette application a fait 
 l'objet de divers améliorations auparavant.\\
 
 \subsection{Architecture}
 L'application fournis est orientée objet, celle-ci est découpé en Business Objects\footnote{les objets 
 métier s'occuppent d'une tâche précise}. Ces Business Objects sont hiérarchisé dans une pyramide, les 
 objets métiers en haut de cette pyramide sont les plus abstrés et utilise les resultats de l'étages infèrieur. 
-Les objets métiers en bas de la pyramide sont les plus proche du flux vidéo brut.
+Les objets métiers en bas de la pyramide sont les plus proche du flux vidéo brut.\\
 
+Les différentes couche de la pyramide sont les suivantes:
 %TODO explications des couche
+\begin{itemize}
+ \item \textbf{Lauch Units} : cette unitée n'est pas un objet métier, elle crée les objets métiers des 
+ couches infèrieurs afin d'avoir une exécution du programme qui utilise ces Business Objects.
+ \item \textbf{BOAnalyseActivity et BOGeneteYassine}
+ \item \textbf{BOExtractOF}
+ \item \textbf{BOGenerateGF}
+ \item \textbf{BODivideMat}
+\end{itemize}
+
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{image/pyramide.png}
+  \includegraphics[width=13cm]{image/pyramide.png}
   \caption{Processus d'extraction des informations pyramidal sur le flux vidéo}
 \end{figure}
 
 %TODO explications de notre couche
+Pour notre projet, nous travaillons dans la couche base de l'application,  
 
 \subsection{Reconnaissance du visage : Viola et Jones}
 L'application est divisée en deux parties. La première recherche le visage grâce à
