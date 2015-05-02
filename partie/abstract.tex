@@ -1,5 +1,21 @@
 \section*{Résumé}
 %\addcontentsline{toc}{section}{Résumé}
+Il existe de plus en plus d'application qui requiert la détection et le traitement d'information
+présentent dans le visage. Dans le cadre de nos étude, nous participons à un projet visant
+à amélioré la normalistion d'un visage extrait d'une image. Pous cela, nous travaillons
+sur une application réalisé par l'équipe FOX qui détecte un visage à partir de l'algorithme de
+Viola et Jones, et qui effectue des traitements afin d'obtenir une image stable du visage
+quelque soit l'orientation ou la distance de la tête de l'utilisateur.\\
+
+Pour améliorer cette normalisation, nous effectuons des recherches sur les solutions possible
+pour détecter les contours d'une image. Plusieurs piste sont envisageable comme l'algorithme de
+Canny qui détecte les contours en analysant les variations de fréquences présentent dans l'image.
+Notre solution final utilise une image extrainte d'un canal du modèle colorimétrique YCbCr, qui permet
+de s'abtraire de la luminosité de la vidéo et de la couleur de peau de l'utilisateur.\\
+
+Après de nombreux traitements, sur la première chrominance du modèle YCbCr, nous obtenons une forme
+correspondant à l'oeil, ce qui nous permet de calculer le centre de l'oeil avec le barycentre de 
+cette forme.
 
 %\section*{Abstract}
 %\addcontentsline{toc}{section}{Abstract}

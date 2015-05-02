@@ -1,13 +1,40 @@
 \section{Implémentation de la solution}
-Plusieurs solutions que nous avons testé ne nous ont pas permis d'atteindre l'objectif du projet comme 
-l'algorithme de Canny qui n'était pas une bonne piste. Nous allons donc voir en détail les solutions qui ont
-été retenu.
+Plusieurs des solutions que nous avons testé ne nous ont pas permis d'atteindre l'objectif du projet.
+Par exempls, nous n'avons pas retenu l'algorithme de Canny, qui malgrès plusieurs traitements sur l'algorithme
+de base, ne permettait pas de s'abstraire de la luminosité de la vidéo.
+Nous allons donc voir en détail les solutions qui ont été utilisé pour atteindre nos objectif.
 
 \subsection{Solutions utilisées dans l'application}
+Lorsque nous analysons une vidéo pour en extraire le centre de l'oeil, nous sommes confronté à certaine contrainte.
+Cependant, la majorité d'entre elles dépendent de la gestion de la couleur de l'image que nous analysons. C'est
+pourquoi l'algorithme de Canny n'était pas efficace, car celui-ci était appliqué à une image en dégradé de gris
+et donc subissait les effets de la luminosité de la vidéo.\\
+
+Nous avons donc choisi d'utiliser un modèle colorimètrique différent afin d'en extraire une des composantes.
 Notre solution utilise donc le canal de la première chrominance du modèle colorimétrique YCbCr ce qui permet 
-de ne plus prendre en compte la couleur de peau et de diminuer l'effet de l'ombre dans l'image que nous traitons.\\
+de ne plus prendre en compte la couleur de peau et de diminuer l'effet de la luminosité dans l'image que nous traitons.\\
+
 %TODO binarisation
 
+Une fois la binarisation effectué, nous devons détecter la forme de l'oeil. Pour cela, nous utilisons les blobs, qui nous
+permette non seulement de récupérer des enveloppes convexes présent dans l'image, mais aussi de déterminer quel enveloppe
+est celle de l'oeil. Nous calculons ensuite le barycentre de cette forme afin d'obtenir le centre de l'oeil.\\
+
+%TODO revoir la derniere phrase
+Cette solution ne gère pas complètement le cas ou l'oeil de l'utilisateur est fermé. Dans le cas ou notre algorithme
+n'arrive pas à calculer le centre de l'oeil, nous récupérons les coordonnées du point qui était calculé par la méthode 
+de l'équipe. Ainsi, dans le cas ou nous ne détectons aucun blob, nous obtenons tout de même un point, sauf si la méthode 
+précédente ne fonctionne pas non plus.
+
 \subsection{Comparaison des résultats obtenu avec les anciens résultats}
+%TODO voir si on peut comparer les résultat sur les vieil vidéo
 
 \subsection{Améliorations envisageables}
+Tout les objectif n'ont pas été remplit, car la recherche de solution pour l'optimisation du calcul du centre de l'oeil
+nous a pris beaucoup de temps à cause des pistes qui n'ont pas aboutit. Notre point obtient de meilleur résultat
+que celui utilisé précédement, mais il reste toujours un écart avec la vérité terrain. Il est donc encore possible
+d'améliorer notre solution.\\
+
+Le second objectif sur la localisation de l'oeil lorsque celui-ci est fermé n'est pas aboutit. Notre solution
+nous permet détecte parfois un point dans ce cas, mais ce qu'il trouve n'est pas le centre de l'oeil mais le
+centre des cils qui sont plus visible lorsque les yeux sont fermés.
