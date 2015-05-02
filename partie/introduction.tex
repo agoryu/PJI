@@ -1,28 +1,18 @@
 \section{Introduction}
-%\addcontentsline{toc}{section}{Introduction}
 
 Pour nos études en master informatique, nous participons à un projet proposé par une 
-équipe de recherche. Cela nous permet de découvrir le milieu de la recherche. 
-%Nous avons
-%sélectionné ce projet, car les connaissances qu'il requiert correspondent à ce qui sera
-%vu dans le master auquel nous avons postulé, c'est-à-dire le master IVI. Ainsi, nous 
-%consolidons les connaissances que nous acquérons durant les options enseigné par ce 
-%master.\\
+équipe de recherche afin de découvrir ce milieu. 
 Étant intéressés par le domaine de l'image et de la vision, nous avons sélectionné ce projet. 
 En effet, nous pensons nous orienter vers le master IVI\footnote{Image Vision Interaction} de 
 Lille 1. Participer à ce projet nous permet de confirmer ce choix et nous apporte des 
-connaissances utiles pour la suite de notre parcours. La réalisation de ce projet, montre 
-notre motivation à poursuivre en master IVI et nous donne une bonne expérience pour notre 
+connaissances utiles pour la suite de notre parcours. La réalisation de ce projet, nous donne une bonne expérience pour notre 
 avenir professionnel dans cette voie.\\
 
 % Introduction
 \subsection{Présentation}
-%L'application sur laquelle nous travaillons permet de localiser le visage
-%afin de reconnaitre sur celui-ci différente émotion comme la fatigue ou encore l'intérêt de la personne pour différents sujets. 
-Pour ce projet, nous sommes amenés à travailler sur la détection de visages et l'améliorer la détection 
-des yeux à l'intérieur d'un flux vidéo.
+Pour ce projet, nous sommes amenés à améliorer la détection des yeux à l'intérieur d'un visage à partir d'un flux vidéo.
 Avec l'évolution du matériels (processeurs, caméras ...), ce procédé se démocratise et prend sa place 
-dans certains applications temps réel. Cette fonctionnalité peut être intégré dans des applications des domaines : 
+dans certaines applications temps réel. Cette fonctionnalité peut être intégré dans les domaines : 
 \begin{itemize}
  \item de la sécurité, ce qui permettrait de détecter des comportements inhabituels chez un individu.
  \item du loisir, pour les jeux vidéo ou encore pour une interaction plus intuitive avec un ordinateur.
@@ -36,9 +26,7 @@ modernes effectuent des algorithmes de reconnaissance de formes, tels que l'algo
 le but de détecter un visage à partir de simples caméras. Cela permet de mieux intégrer ces applications 
 afin qu'il n'y est aucune contrainte pour l'utilisateur.\\
 
-Dans le cadre de ce projet, nos travaux sont utilisés  
-%L'objectif de l'application sur lequel nous travaillons est de détecter les mouvements du visage de l'utilisateur 
-afin d'effectuer de la reconnaissance d'émotions lors d'applications
+Dans le cadre de ce projet, nos travaux sont utilisés afin d'effectuer de la reconnaissance d'émotions lors d'applications
 du type e-learning\footnote{Formation en ligne}. Ce procédé permettrait de détecter si un cours 
 intéresse ou non les élèves afin de pouvoir l'améliorer. Si on voit sur une partie du cour
 que de nombreux élèves ont présentés des signes de fatigue ou qu'ils n'écoutaient plus, il sera
@@ -56,16 +44,11 @@ des applications temps réel, ce qui permet d'avoir un niveau de réactivité tr
 
 Le projet sur lequel nous travaillons est basé sur les travaux des membres de l'équipe qui se sont concentrés sur la
 détection de visages et des yeux. Cette détection permet ensuite de normaliser le visage, c'est-à-dire
-d'avoir une image statique contenant ce visage afin de réaliser des traitements sur cette image. C'est
+d'avoir une image statique contenant ce visage afin de réaliser des traitements sur celle-ci. C'est
 traitement peuvent par exemple être la détection de la fatigue ou de la concentration d'un individu.\\
 
 Puisque la normalisation du visage repose sur la détection du visage et des yeux, il est nécessaire que cette 
 détection soit correct et précise, afin d'avoir une normalisation du visage cohérente.\\
-
-%Une première approche de la reconnaissance d'émotions sur une vidéo a été 
-%réalisé par les chercheurs de l'équipe, mais elle n'est pas encore optimale. Le projet est une application temps réel, 
-%dont les flux vidéo peuvent provenir de vidéos enregistrées ou d'une caméra type webcam. Nos travaux pourront être utilisés par
-%l'équipe dans d'autres applications de reconnaissance d'émotions sur lesquels ils effectuent leur recherche.\\
 
 % Problème
 \subsection{Problèmatique de l'existant}
@@ -77,14 +60,6 @@ l'utilisateur effectue une rotation de la tête, les algorithmes utilisés ne so
 de suivre ce mouvement. Il faut donc, grâce à différents axes présents dans le visage, détecter
 ce mouvement afin de garder une région d'intérêt correcte pour les traitements suivants.\\
 
-%les yeux fermés
-Actuellement l'application n'arrive pas à suivre un visage dont les yeux sont fermés. En effet,
-l'algorithme de Viola et Jones repose sur la localisation de plusieurs points du visage, dont 
-les yeux sont les points les plus importants. Si l'un des deux yeux est absent ou fermé, l'algorithme 
-à moins de chance de détecter le visage. Cela implique que si une personne cligne des yeux
-l'application a des difficultées pour retrouver le visage pour la suite des traitements et cela 
-cause de nombreuses erreurs.\\
-
 %stabilité des centres des yeux
 De plus, les points représentant le centre des yeux ne sont pas parfaitement stables. Ce décalage a de 
 nombreuses conséquences sur les traitements effectués par l'application, car l'application se base sur 
@@ -93,41 +68,37 @@ visage. Il est donc primordial que la position de ces muscles soit stable, pour 
 lors des traitements. Et pour cela il faut que l'image normalisé du visage soit stable, afin que l'image
 du visage soit invariant au changement de repère.\\
 
-%TODO contrainte du a la qualité de la vidéo
+%les yeux fermés
+%pas viola jones mais application qui galere
+Actuellement l'application n'arrive pas à localiser le centre des yeux lorsque ceux-ci sont fermé. 
+Cela implique que la normalisation du visage ne se fait pas correctement et que les points du
+visage servant à faire des traitement ne sont pas parfaitement stable.\\
+% En effet,
+% l'algorithme de Viola et Jones repose sur la localisation de plusieurs points du visage, dont 
+% les yeux sont les points les plus importants. Si l'un des deux yeux est absent ou fermé, l'algorithme 
+% à moins de chance de détecter le visage. Cela implique que si une personne cligne des yeux
+% l'application a des difficultées pour retrouver le visage pour la suite des traitements et cela 
+% cause de nombreuses erreurs.\\
+
 La qualité de la vidéo et sa taille peuvent également être problèmatique dans les traitements. Afin de
 pouvoir valider nos travaux, nous avons accès à une base de vidéo possèdant les véritables points
 du centre de l'oeil. Malheureusement, ces vidéos sont relativement ancienne, la qualité n'est pas 
 très bonne et elles sont plus petite que les vidéos sur lesquels l'application a été testé. Les 
 calcules actuel du centre de l'oeil ne fonctionne pas très bien sur ces vidéos.\\
 
-%Il est donc important de remédier à ces différentes problèmatique, car l'ensemble des applications
-%de l'équipe FOX reposent sur cette normalisation du visage.
 La majorité des applications de l'équipe FOX reposent sur la détection du visage et des yeux. Il est donc 
 important de remédier à ces différentes problèmatiques.\\
 
 % Objectifs
 \subsection{Objectif du projet}
-%Pour résoudre ces différentes problématiques, nous avons besoin de parfaitement localiser le centre des
-%yeux.\\
-% Pour cela, il existe différents algorithmes de détection de contours dans une image. Lorsque nous aurons
-% détecté les contours des yeux, il nous sera alors possible de calculer le centre de la forme
-% que nous aurons détecté. Les algorithmes de détection de forme ont besoin, pour effectuer leur traitement,
-% d'une image binaire. Il nous faut donc déterminer quels sont les traitements à effectuer
-% sur l'image d'origine récupérée par l'application afin de bien faire ressortir la forme d'un oeil. L'image
-% sur laquelle nous travaillons est une image de la zone péri-oculaire de l'utilisateur, qui est calculé par
-% l'algorithme actuel de l'application. Nous allons donc utiliser l'algorithme actuel afin d'affiner la localisation
-% du centre de l'oeil.\\
 
 Le première objectif est donc de stabiliser la position du centre de l'oeil, afin d'avoir une normalisation de l'image
-totalement stable. Pour cela nous utilisons les calcules précédents afin de récupérer une ROI de la zone péri-oculaire, puis
+totalement stable. Pour cela nous utilisons les calcules réalisé précédement par l'équipe afin de récupérer une ROI de la zone péri-oculaire. Puis
 nous affinons la localisation du centre de l'oeil avec de nouveau traitement.\\
 
 Le second objectif est de calculer le centre de l'oeil lorsque celui-ci est fermé. Cette étape est plus complexe,
 car contrairement à un oeil ouvert, l'oeil fermé à la même couleur que la peau. Il faut donc réussir à différencier ces
 deux situations afin d'appliquer le bon traitement.\\ 
-%Une première approche lors de la détection de l'oeil fermé est 
-%de travailler avec des filtres qui détectent des textures. L'idée est que la pupille a une texture différente de celle 
-%du reste du visage.\\
 
 Pour répondre aux problématiques du projet, nous allons d'abord voir la structure actuelle du projet, ainsi que les algorithmes
 utilisés. Puis, nous détaillerons nos démarches pour résoudre les problématiques et nous expliquerons la solution finale que nous avons
