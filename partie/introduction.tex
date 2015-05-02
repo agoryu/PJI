@@ -2,36 +2,47 @@
 %\addcontentsline{toc}{section}{Introduction}
 
 Pour nos études en master informatique, nous participons à un projet proposé par une 
-équipe de recherche. Cela nous permet de découvrir le milieu de la recherche. Nous avons
-sélectionné ce projet, car les connaissances qu'il requiert correspondent à ce qui sera
-vu dans le master auquel nous avons postulé, c'est-à-dire le master IVI. Ainsi, nous 
-consolidons les connaissances que nous acquérons durant les options enseigné par ce 
-master.\\
+équipe de recherche. Cela nous permet de découvrir le milieu de la recherche. 
+%Nous avons
+%sélectionné ce projet, car les connaissances qu'il requiert correspondent à ce qui sera
+%vu dans le master auquel nous avons postulé, c'est-à-dire le master IVI. Ainsi, nous 
+%consolidons les connaissances que nous acquérons durant les options enseigné par ce 
+%master.\\
+Étant intéressés par le domaine de l'image et de la vision, nous avons sélectionné ce projet. 
+En effet, nous pensons nous orienter vers le master IVI\footnote{Image Vision Interaction} de 
+Lille 1. Participer à ce projet nous permet de confirmer ce choix et nous apporte des 
+connaissances utiles pour la suite de notre parcours. La réalisation de ce projet, montre 
+notre motivation à poursuivre en master IVI et nous donne une bonne expérience pour notre 
+avenir professionnel dans cette voie.\\
 
 % Introduction
-L'application sur laquelle nous travaillons permet de localiser le visage
-d'un individu au travers d'un flux vidéo.
+\subsection{Présentation}
+%L'application sur laquelle nous travaillons permet de localiser le visage
 %afin de reconnaitre sur celui-ci différente émotion comme la fatigue ou encore l'intérêt de la personne pour différents sujets. 
-Ce procédé se démocratise et il est de plus en plus utilisé dans des applications dans le domaine : 
+Pour ce projet, nous sommes amenés à travailler sur la détection de visages et l'améliorer la détection 
+des yeux à l'intérieur d'un flux vidéo.
+Avec l'évolution du matériels (processeurs, caméras ...), ce procédé se démocratise et prend sa place 
+dans certains applications temps réel. Cette fonctionnalité peut être intégré dans des applications des domaines : 
 \begin{itemize}
  \item de la sécurité, ce qui permettrait de détecter des comportements inhabituels chez un individu.
  \item du loisir, pour les jeux vidéo ou encore pour une interaction plus intuitive avec un ordinateur.
  \item de la publicité, pour que celle-ci corresponde au besoin des individus. 
 \end{itemize}
 \ \\
-Ce type d'application utilise différentes technologies, mais celles-ci sont souvent trop intrusives 
+Ce type d'application utilise différentes technologies, mais certaines sont souvent trop intrusives 
 et demandent à l'utilisateur d'utiliser du matériel assez spécifique. Or le but des algorithmes actuels
 est de faire en sorte que l'utilisateur ne se rende même pas compte qu'il utilise ce type de technologie. Les applications plus 
 modernes effectuent des algorithmes de reconnaissance de formes, tels que l'algorithme de Viola et Jones, dans 
 le but de détecter un visage à partir de simples caméras. Cela permet de mieux intégrer ces applications 
 afin qu'il n'y est aucune contrainte pour l'utilisateur.\\
 
-L'objectif de l'application sur lequel nous travaillons est de détecter les mouvements
-du visage de l'utilisateur afin d'effectuer de la reconnaissance d'émotions lors d'applications
-du type e-learning\footnote{formation en ligne}. Ce procédé permettrait de détecter si un cours 
+Dans le cadre de ce projet, nos travaux sont utilisés  
+%L'objectif de l'application sur lequel nous travaillons est de détecter les mouvements du visage de l'utilisateur 
+afin d'effectuer de la reconnaissance d'émotions lors d'applications
+du type e-learning\footnote{Formation en ligne}. Ce procédé permettrait de détecter si un cours 
 intéresse ou non les élèves afin de pouvoir l'améliorer. Si on voit sur une partie du cour
 que de nombreux élèves ont présentés des signes de fatigue ou qu'ils n'écoutaient plus, il sera
-alors possible aux enseignants de modifier cette partie.
+alors possible aux enseignants de modifier cette partie.\\
 
 
 % Contexte
@@ -44,9 +55,12 @@ reconnaissance de personnes. La grande majorité de leurs travaux sont
 des applications temps réel, ce qui permet d'avoir un niveau de réactivité très élevé.\\ 
 
 Le projet sur lequel nous travaillons est basé sur les travaux des membres de l'équipe qui se sont concentrés sur la
-détection de visage et des yeux. Cette détection permet ensuite de normaliser le visage, c'est-à-dire
+détection de visages et des yeux. Cette détection permet ensuite de normaliser le visage, c'est-à-dire
 d'avoir une image statique contenant ce visage afin de réaliser des traitements sur cette image. C'est
-traitement peuvent par exemple être la détection de la fatigue ou de la concentration d'un individu.
+traitement peuvent par exemple être la détection de la fatigue ou de la concentration d'un individu.\\
+
+Puisque la normalisation du visage repose sur la détection du visage et des yeux, il est nécessaire que cette 
+détection soit correct et précise, afin d'avoir une normalisation du visage cohérente.\\
 
 %Une première approche de la reconnaissance d'émotions sur une vidéo a été 
 %réalisé par les chercheurs de l'équipe, mais elle n'est pas encore optimale. Le projet est une application temps réel, 
@@ -86,8 +100,10 @@ du centre de l'oeil. Malheureusement, ces vidéos sont relativement ancienne, la
 très bonne et elles sont plus petite que les vidéos sur lesquels l'application a été testé. Les 
 calcules actuel du centre de l'oeil ne fonctionne pas très bien sur ces vidéos.\\
 
-Il est donc important de remédier à ces différentes problèmatique, car l'ensemble des applications
-de l'équipe FOX reposent sur cette normalisation du visage.
+%Il est donc important de remédier à ces différentes problèmatique, car l'ensemble des applications
+%de l'équipe FOX reposent sur cette normalisation du visage.
+La majorité des applications de l'équipe FOX reposent sur la détection du visage et des yeux. Il est donc 
+important de remédier à ces différentes problèmatiques.\\
 
 % Objectifs
 \subsection{Objectif du projet}
@@ -115,6 +131,6 @@ deux situations afin d'appliquer le bon traitement.\\
 
 Pour répondre aux problématiques du projet, nous allons d'abord voir la structure actuelle du projet, ainsi que les algorithmes
 utilisés. Puis, nous détaillerons nos démarches pour résoudre les problématiques et nous expliquerons la solution finale que nous avons
-implémentée dans l'application.
+implémentée dans l'application.\\
 
 \newpage
