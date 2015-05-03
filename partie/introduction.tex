@@ -11,8 +11,8 @@ avenir professionnel dans cette voie.\\
 % Introduction
 \subsection{Présentation}
 Pour ce projet, nous sommes amenés à améliorer la détection des yeux à l'intérieur d'un visage à partir d'un flux vidéo.
-Avec l'évolution du matériels (processeurs, caméras ...), ce procédé se démocratise et prend sa place 
-dans certaines applications temps réel. Cette fonctionnalité peut être intégré dans les domaines : 
+Avec l'évolution du matériel (processeurs, caméras ...), ce procédé se démocratise et prend sa place 
+dans certaines applications temps réel. Cette fonctionnalité peut être intégrée dans les domaines : 
 \begin{itemize}
  \item de la sécurité, ce qui permettrait de détecter des comportements inhabituels chez un individu.
  \item du loisir, pour les jeux vidéo ou encore pour une interaction plus intuitive avec un ordinateur.
@@ -20,16 +20,16 @@ dans certaines applications temps réel. Cette fonctionnalité peut être intég
 \end{itemize}
 \ \\
 Ce type d'application utilise différentes technologies, mais certaines sont souvent trop intrusives 
-et demandent à l'utilisateur d'utiliser du matériel assez spécifique. Or le but des algorithmes actuels
+et demandent à l'usager d'utiliser du matériel assez spécifique. Or le but des algorithmes actuels
 est de faire en sorte que l'utilisateur ne se rende même pas compte qu'il utilise ce type de technologie. Les applications plus 
 modernes effectuent des algorithmes de reconnaissance de formes, tels que l'algorithme de Viola et Jones, dans 
 le but de détecter un visage à partir de simples caméras. Cela permet de mieux intégrer ces applications 
-afin qu'il n'y est aucune contrainte pour l'utilisateur.\\
+afin qu'il n'y ait aucune contrainte pour l'utilisateur.\\
 
 Dans le cadre de ce projet, nos travaux sont utilisés afin d'effectuer de la reconnaissance d'émotions lors d'applications
 du type e-learning\footnote{Formation en ligne}. Ce procédé permettrait de détecter si un cours 
 intéresse ou non les élèves afin de pouvoir l'améliorer. Si on voit sur une partie du cour
-que de nombreux élèves ont présentés des signes de fatigue ou qu'ils n'écoutaient plus, il sera
+que de nombreux élèves présentent des signes de fatigue ou qu'ils n'écoutent plus, il sera
 alors possible aux enseignants de modifier cette partie.\\
 
 
@@ -37,18 +37,18 @@ alors possible aux enseignants de modifier cette partie.\\
 \subsection{Contexte}
 Pour la réalisation de ce projet, nous travaillons avec l'équipe FOX qui étudie
 l'analyse du mouvement à partir de vidéos. Leurs recherches portent
-sur l'extraction du comportement humain depuis les flux vidéo.  Leurs travaux sont
+sur l'extraction du comportement humain depuis les flux vidéos.  Leurs travaux sont
 divisés en quatre grands domaines : le regard, qui est la partie sur laquelle nous travaillons, l'événement, l'émotion et la
 reconnaissance de personnes. La grande majorité de leurs travaux sont
 des applications temps réel, ce qui permet d'avoir un niveau de réactivité très élevé.\\ 
 
 Le projet sur lequel nous travaillons est basé sur les travaux des membres de l'équipe qui se sont concentrés sur la
 détection de visages et des yeux. Cette détection permet ensuite de normaliser le visage, c'est-à-dire
-d'avoir une image statique contenant ce visage afin de réaliser des traitements sur celle-ci. C'est
-traitement peuvent par exemple être la détection de la fatigue ou de la concentration d'un individu.\\
+d'avoir une image statique contenant ce visage afin de réaliser des traitements sur celle-ci. Ces
+traitements peuvent par exemple être la détection de la fatigue ou de la concentration d'un individu.\\
 
 Puisque la normalisation du visage repose sur la détection du visage et des yeux, il est nécessaire que cette 
-détection soit correct et précise, afin d'avoir une normalisation du visage cohérente.\\
+détection soit correcte et précise, afin d'avoir une normalisation du visage cohérente.\\
 
 % Problème
 \subsection{Problèmatique de l'existant}
@@ -62,17 +62,17 @@ ce mouvement afin de garder une région d'intérêt correcte pour les traitement
 
 %stabilité des centres des yeux
 De plus, les points représentant le centre des yeux ne sont pas parfaitement stables. Ce décalage a de 
-nombreuses conséquences sur les traitements effectués par l'application, car l'application se base sur 
+nombreuses conséquences sur les traitements effectués par l'application, car celle-ci se base sur 
 les ombres provoquées par le mouvement de certains muscles du 
 visage. Il est donc primordial que la position de ces muscles soit stable, pour ne pas les confondre
-lors des traitements. Et pour cela il faut que l'image normalisé du visage soit stable, afin que l'image
+lors des traitements. Et pour cela il faut que l'image normalisée du visage soit stable, afin que l'image
 du visage soit invariant au changement de repère.\\
 
 %les yeux fermés
 %pas viola jones mais application qui galere
-Actuellement l'application n'arrive pas à localiser le centre des yeux lorsque ceux-ci sont fermé. 
+Actuellement l'application n'arrive pas à localiser le centre des yeux lorsque ceux-ci sont fermés. 
 Cela implique que la normalisation du visage ne se fait pas correctement et que les points du
-visage servant à faire des traitement ne sont pas parfaitement stable.\\
+visage servant à faire des traitements ne sont pas stables.\\
 % En effet,
 % l'algorithme de Viola et Jones repose sur la localisation de plusieurs points du visage, dont 
 % les yeux sont les points les plus importants. Si l'un des deux yeux est absent ou fermé, l'algorithme 
@@ -80,27 +80,27 @@ visage servant à faire des traitement ne sont pas parfaitement stable.\\
 % l'application a des difficultées pour retrouver le visage pour la suite des traitements et cela 
 % cause de nombreuses erreurs.\\
 
-La qualité de la vidéo et sa taille peuvent également être problèmatique dans les traitements. Afin de
+La qualité de la vidéo et sa taille peuvent également être problèmatiques dans les traitements. Afin de
 pouvoir valider nos travaux, nous avons accès à une base de vidéo possèdant les véritables points
-du centre de l'oeil. Malheureusement, ces vidéos sont relativement ancienne, la qualité n'est pas 
-très bonne et elles sont plus petite que les vidéos sur lesquels l'application a été testé. Les 
-calcules actuel du centre de l'oeil ne fonctionne pas très bien sur ces vidéos.\\
+du centre de l'oeil. Malheureusement, ces vidéos sont relativement anciennes, la qualité n'est pas 
+très bonne et elles sont plus petites que les vidéos sur lesquelles l'application a été testée. Les 
+calculs actuels du centre de l'oeil ne fonctionnent pas très bien sur ces vidéos.\\
 
-La majorité des applications de l'équipe FOX reposent sur la détection du visage et des yeux. Il est donc 
+La majorité des applications de l'équipe FOX repose sur la détection du visage et des yeux. Il est donc 
 important de remédier à ces différentes problèmatiques.\\
 
 % Objectifs
 \subsection{Objectif du projet}
 
-Le première objectif est donc de stabiliser la position du centre de l'oeil, afin d'avoir une normalisation de l'image
-totalement stable. Pour cela nous utilisons les calcules réalisé précédement par l'équipe afin de récupérer une ROI de la zone péri-oculaire. Puis
-nous affinons la localisation du centre de l'oeil avec de nouveau traitement.\\
+Le premier objectif est donc de stabiliser la position du centre de l'oeil, afin d'avoir une normalisation de l'image
+totalement stable. Pour cela nous utilisons les calculs réalisés précédement par l'équipe, afin de récupérer une ROI de la zone péri-oculaire. Puis
+nous affinons la localisation du centre de l'oeil avec de nouveaux traitements.\\
 
 Le second objectif est de calculer le centre de l'oeil lorsque celui-ci est fermé. Cette étape est plus complexe,
-car contrairement à un oeil ouvert, l'oeil fermé à la même couleur que la peau. Il faut donc réussir à différencier ces
+car contrairement à un oeil ouvert, l'oeil fermé a la même couleur que la peau. Il faut donc réussir à différencier ces
 deux situations afin d'appliquer le bon traitement.\\ 
 
-Pour répondre aux problématiques du projet, nous allons d'abord voir la structure actuelle du projet, ainsi que les algorithmes
+Pour répondre aux problématiques du projet, nous allons d'abord voir la structure actuelle de l'application, ainsi que les algorithmes
 utilisés. Puis, nous détaillerons nos démarches pour résoudre les problématiques et nous expliquerons la solution finale que nous avons
 implémentée dans l'application.\\
 
