@@ -70,7 +70,12 @@ Pour améliorer les perfomance de leur algorithme, Viola et Jones utilise la mé
 principe est de séléctionner les caractèristiques les plus performante pour la détection de l'objet grâce à
 un calcule de probabilité utilisant l'entropie\footnote{valeur mesurant l'incertitude d'une données} des données.
 
-\subsection{Suivi des yeux}
+\subsection{Détection des yeux}
+Une fois que la région du visage est reconnue dans le flux vidéo, nous cherchons à détecter les yeux. 
+L'algorithme de détection des yeux déjà existant dans l'application permet une détection des yeux 
+robuste, mais accès peu précise. Cette algorithme consiste à scanner la région retrouver par la 
+méthode de Viola et Jones et essayer de retrouver les yeux via une méthode Means Shift\footnote{technique 
+d'analyse permettant de trouver les maxima dans une fonction de densité}
 
 
 
