@@ -8,14 +8,18 @@ Viola et Jones, et qui effectue des traitements afin d'obtenir une image stable 
 quelque soit l'orientation ou la distance de la tête de l'utilisateur.\\
 
 Pour améliorer cette normalisation, nous effectuons des recherches sur les solutions possible
-pour détecter les contours d'une image. Plusieurs piste sont envisageable comme l'algorithme de
+pour détecter les contours d'une image. Pour effectuer cette normalisation, nous avons besoin
+de calculer des points fixes dans le visage. Nous allons pour cela calculer la position du
+centre de chaque oeil. Pour récupérer ces points plusieurs pistes sont envisageable, comme l'algorithme de
 Canny qui détecte les contours en analysant les variations de fréquences présentent dans l'image.
-Notre solution final utilise une image extrainte d'un canal du modèle colorimétrique YCbCr, qui permet
+Notre solution final utilise une image extraite d'un canal du modèle colorimétrique YCbCr, qui permet
 de s'abtraire de la luminosité de la vidéo et de la couleur de peau de l'utilisateur.\\
 
-Après de nombreux traitements, sur la première chrominance du modèle YCbCr, nous obtenons une forme
-correspondant à l'oeil, ce qui nous permet de calculer le centre de l'oeil avec le barycentre de 
-cette forme.
+Après de nombreux traitements, sur la première chrominance du modèle YCbCr, nous obtenons plusieurs
+formes présentes dans une image binaire. Afin de déterminer quel est la forme représentant l'oeil,
+nous utilisons des blobs qui nous permettent de ne garder que les formes qui respectent les 
+conditions que nous spécifions. Nous obtenons ainsi la forme correspondant à l'oeil, ce qui nous permet 
+de calculer le centre de l'oeil avec le barycentre de cette forme.
 
 %\section*{Abstract}
 %\addcontentsline{toc}{section}{Abstract}
