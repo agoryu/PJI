@@ -1,10 +1,11 @@
 \section{Application existante}
 
 \subsection{Présentation de l'application}
-L'application sur laquelle nous travaillons est écrite en C++ avec l'utilisation de QtCreator. 
-La bibliothèque de vision OpenCV  est largement utilisée dans le projet, le programme 
-compile avec la version 2.4.8 d'OpenCV. Ce programme a été développé par les membres de l'équipe 
-Fox. Cette application a fait l'objet de divers améliorations auparavant.\\
+La parti sur laquelle nous travaillons est écrite en C++. Pour des raisons pratiques le framework 
+QtCreator est utilisé, il facilite la creation d'applications et d'interfaces graphiques. De même, 
+la bibliothèque OpenCV  est largement utilisée dans le projet, elle est open-source et dispose de 
+nombreux algorithmes dans le domaine de la vision par oridinateur. Ainsi, le développement de 
+l'application est plus rapide car les algorithmes tels que Viola etJones ou Canny sont déjà implémentés.\\
 
 \subsection{Architecture}
 L'application fournis est orientée objet et respect le principe <<open-close>>. En effet, celle-ci est 
@@ -78,9 +79,10 @@ un autre algorithme a été utilisé pour la détection des yeux.
 \subsection{Détection des yeux}
 Une fois que la région du visage est reconnue dans le flux vidéo, nous cherchons à détecter les yeux. 
 L'algorithme de détection des yeux déjà existant dans l'application permet une détection des yeux 
-robuste, mais accès peu précise. Cette algorithme consiste à scanner la région retrouver par la 
-méthode de Viola et Jones et essayer de retrouver les yeux via une méthode Means Shift\footnote{technique 
-d'analyse permettant de trouver les maxima dans une fonction de densité}
+robuste, mais assez peu précise. Cet algorithme se déroule en plusieurs étapes. D'abord, la région du visage 
+retrouvé par la méthode de Viola et Jones est égalisée. Ensuite, elle est scannée de bas en haut afin de
+trouver les yeux avant les sourcils. Dans un même temps l'algorithme essaie de retrouver les yeux via la
+méthode Means Shift\footnote{technique d'analyse permettant de trouver les maxima dans une fonction de densité}.\\
 
 
 

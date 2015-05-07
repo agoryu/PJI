@@ -183,10 +183,15 @@ prenant un seuil qui semble correct à première vue pour la binarisation, nous 
  \caption{Résultat après traitement sur la chrominance 1}
 \end{figure}
 
-Il nous faut maintenant trouver les bons paramètres afin que le seuil soit correct quelque
-soit la luminosité de la vidéo.
+Il nous faut maintenant trouver les bons paramètres afin d'obtenir une image binaire qui nous permet d'extraire les 
+coordonnées l'œil quelle que soit la luminosité de la vidéo.
 
-\subsection{Seuil pour la binarisation de l'image}
+\subsection{Binarisation de l'image}
+Nous souhaitons une image binaire à partir du premier canal de chrominance afin d'y appliquer les blobs. 
+Notre but est de retrouver le blob qui correspond à celui de l'œil. Ainsi, le centroïde de ce blob nous 
+donne le centre de cette de l'œil.\\
+
+
 
 
 \subsection{Sélection de composantes convexes avec des blobs}
