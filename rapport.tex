@@ -33,7 +33,6 @@
 
 % table of contents setting
 \usepackage[]{titletoc}
-\usepackage[toc,page]{appendix}
 
 % include pdf
 \usepackage[final]{pdfpages}
@@ -48,6 +47,18 @@
 
 % bibliographie
 \usepackage[nottoc, notlof, notlot]{tocbibind}
+
+\usepackage{caption}
+\usepackage{tocloft}
+
+\newcommand{\listappendicesname}{{\Large  Table des annexes}}
+\newlistof{appendices}{apc}{\listappendicesname}
+\newcommand{\appendices}[1]{%
+  \refstepcounter{appendices}%
+  \addcontentsline{apc}{appendices}{\hspace{17pt}\numberline{\theappendices}#1}%
+}
+
+\newcommand{\newappendix}[1]{\section*{#1}\appendices{#1}}
 
 % code color
 \definecolor{ligthyellow}{RGB}{250,247,220}
@@ -176,6 +187,8 @@
   \tableofcontents
   \newpage
   \listoffigures
+  \ \\
+  \listofappendices
     
   \include{partie/introduction}
   \include{partie/existant}
