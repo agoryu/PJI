@@ -191,12 +191,12 @@ Nous souhaitons une image binaire à partir du premier canal de chrominance afin
 Notre but est de retrouver la forme convexe qui correspond à celle de l'œil. Ainsi, le centroïde de cette 
 forme nous donne le centre de l'œil.\\
 
-Dans ce but, plusieurs étapes sont nécessaire. D'abord, nous normalisons l'histogramme afin d'utiliser 
-tous les niveaux de gris, celà nous permet de travailler sur l'ensemble de l'histogramme quel que soit
-image et le visage détecté. Nous préférons faire une normalisation de l'histogramme, plutôt qu'une 
+Dans ce but, plusieurs étapes sont nécessaires. D'abord, nous normalisons l'histogramme afin d'utiliser 
+tous les niveaux de gris, celà nous permet de travailler sur l'ensemble de l'histogramme quels que soient
+l'image et le visage détecté. Nous préférons faire une normalisation de l'histogramme, plutôt qu'une 
 égalisation. En effet, l'égalisation répartit au mieux les niveaux de gris sur l'ensemble de 
 la plage de l'hisgramme. Nous souhaitons conserver les modes et les niveaux plus sombres, or l'égalisation 
-à pour effet d'étaler les modes de l'histogramme et de rassembler les tons sombres et clairs. À l'inverse, 
+a pour effet d'étaler les modes de l'histogramme et de rassembler les tons sombres et clairs. À l'inverse, 
 la normalisation répartit proportionnellement les niveaux de gris sur toute la plage ().\\
 
 
