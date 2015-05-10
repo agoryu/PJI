@@ -83,7 +83,7 @@ de chaque sous image.
 Grâce à ce procédé, nous obtenons une image sans la grille que nous avions précédemment. Cependant,
 le bruit dû aux ombres et aux rides ne permet pas encore d'effectuer des traitements pour localiser le centre de l'oeil.
 Nous avons un second problème qui est la couleur de peau de l'utilisateur. Nous avons appliqué notre méthode 
-sur des personnes ayant des couleurs de peau différentes et les résultats n'étaient pas exploitables (voir annexe p\pageref{resultCanny}).\\ 
+sur des personnes ayant des couleurs de peau différentes et les résultats n'étaient pas exploitables (voir annexe 1 p\pageref{resultCanny}).\\ 
 
 Afin de supprimer les bruits dûs aux ombres présentes dans l'image, nous décidons de travailler sur d'autres modèles
 colorimétriques comme le HSV\footnote{Hue Saturation Value} dont la composante \enquote{saturation} peut nous
@@ -197,7 +197,7 @@ l'image et le visage détecté. Nous préférons faire une normalisation de l'hi
 égalisation. En effet, l'égalisation répartit au mieux les niveaux de gris sur l'ensemble de 
 la plage de l'histogramme. Nous souhaitons conserver les modes et les niveaux plus sombres, or l'égalisation 
 a pour effet d'étaler les modes de l'histogramme et de rassembler les tons sombres et clairs. À l'inverse, 
-la normalisation répartit proportionnellement les niveaux de gris sur toute la plage (Annexe 2). Après 
+la normalisation répartit proportionnellement les niveaux de gris sur toute la plage (voir annexe 2 p\pageref{compHist}). Après 
 normalisation, nous travaillons pour toutes les images, sur exactement la même plage de l'histogramme, avec un niveau de 
 gris minimum à 0 et un niveau maximum à 255.\\
 
@@ -210,7 +210,7 @@ gris minimum à 0 et un niveau maximum à 255.\\
 \end{figure}
 
 Ensuite, nous remarquons que les niveaux de gris correspondant aux yeux sont, dans tous nos tests, 
-compris entre 0 à 100 dans le canal Cb normalisé, voir annexe 3. Par conséquent, nous appliquons 
+compris entre 0 à 100 dans le canal Cb normalisé (voir annexe 3 p\pageref{grayDiff}). Par conséquent, nous appliquons 
 une LUT\footnote{Look Up Table} pour que les niveaux de gris étant de 0 à 100 sont normalisés de 
 0 à 255.
 
@@ -227,7 +227,7 @@ l'image résultant de l'ouverture, avec la méthode d'Otsu\cite{OTSU_paper}. Cet
 permet de retrouver un seuil séparant l'histogramme en deux classes, dont la variance inter-classe est 
 minimisée. Ainsi, en appliquant le seuillage d'Otsu, nous conservons uniquement la classe de pixels la plus 
 claire. Enfin, nous effectuons une dernière ouverture morphologique, sur l'image binaire, pour bien 
-différencier les zones des yeux, sourcils et cheveux (Annexe 4).
+différencier les zones des yeux, sourcils et cheveux (voir annexe 4 p\pageref{binOtsu}).
 
 \begin{figure}[H]
   \centering
