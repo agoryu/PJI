@@ -5,7 +5,7 @@
 
 \setcounter{figure}{0}
 
-\appendices{Résultats du filtre de Canny sur des couleurs de peau différentes}
+\appendices{Résultats du filtre de Canny sur des couleurs de peau différentes.}
 \begin{figure}[H]
   \center
   \begin{tabular}{|c|c|}
@@ -19,12 +19,12 @@
     \includegraphics{image/original_black.png} & \includegraphics{image/cannyBlack.png}\\
     \hline
   \end{tabular}
-  \caption{Résultats du filtre de Canny sur des personnes de couleur de peau différentes}
+  \caption{Résultats du filtre de Canny sur des personnes de couleur de peau différentes.}
 \end{figure}
 
 \appendices{Comparatif des histogrammmes du canal Cb, selon les traitement}
 \begin{figure}[H]
-  \center
+  \centering
   \begin{tabular}{|c|c|c|c|}
     \hline
       Image RGB & Canal Cb de YCbCr & Canal Cb égalisé & Canal Cb normalisé \\
@@ -44,7 +44,33 @@
     %\includegraphics{image/original_black.png} & \includegraphics{image/cannyBlack.png}\\
     %\hline
   \end{tabular}
-  \caption{Comparatif des histogrammmes du canal Cb, selon les traitement}
+  \caption{Comparatif des histogrammmes du canal Cb, selon les traitement.}
+\end{figure}
+
+\appendices{Différents niveaux de gris dans le canal Cb}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=4cm]{image/008/normalized_info.png}
+  \includegraphics[width=4cm]{image/017/normalized_info.png}
+  \includegraphics[width=4cm]{image/ssm3/normalized_info.png}
+  \caption{Différents niveaux de gris dans le canal Cb}
+\end{figure}
+
+\appendices{Binarisation avec la méthode d'Otsu, sur différents exemples.}
+\begin{figure}[H]
+  \centering
+  \begin{tabular}{|c|c|c|}
+    \hline
+     Image RGB & \shortstack{Inversion et ouverture de l'image, \\ après l'étape de la LUT}  & \shortstack{Binarisation avec la méthode \\ d'Otsu et ouverture de l'image} \\
+    \hline
+    \includegraphics[width=4cm]{image/008/rgb_source.png} & \includegraphics[width=4cm]{image/008/ycbcr_inv_open.png} & \includegraphics[width=4cm]{image/008/ycbcr_bin_open.png} \\
+    \hline
+    \includegraphics[width=4cm]{image/017/rgb_source.png} & \includegraphics[width=4cm]{image/017/ycbcr_inv_open.png} & \includegraphics[width=4cm]{image/017/ycbcr_bin_open.png} \\
+    \hline
+    \includegraphics[width=4cm]{image/ssm3/rgb_source.png} & \includegraphics[width=4cm]{image/ssm3/ycbcr_inv_open.png} & \includegraphics[width=4cm]{image/ssm3/ycbcr_bin_open.png} \\
+    \hline
+  \end{tabular}
+  \caption{Binarisation avec la méthode d'Otsu, sur différents exemples.}
 \end{figure}
 
 \newpage
