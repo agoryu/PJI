@@ -215,6 +215,8 @@ l'image et le visage détecté. Nous préférons faire une normalisation de l'hi
 la plage de l'histogramme. Nous souhaitons conserver les modes et les niveaux plus sombres, or l'égalisation 
 a pour effet d'étaler les modes de l'histogramme et de rassembler les tons sombres et clairs. À l'inverse, 
 la normalisation répartit proportionnellement les niveaux de gris sur toute la plage. 
+Après normalisation, nous travaillons pour toutes les images, sur exactement la même plage de l'histogramme, 
+avec un niveau de gris minimum à 0 et un niveau maximum à 255.\\
 
 \begin{figure}[H]
   \centering
@@ -232,23 +234,8 @@ la normalisation répartit proportionnellement les niveaux de gris sur toute la 
       \shortstack{\includegraphics[width=3.3cm]{image/017/ycbcr_ch1_equalized.png}  \\ \includegraphics[width=3.3cm]{image/017/ycbcr_ch1_equalized_hist.png}} &
       \shortstack{\includegraphics[width=3.3cm]{image/017/ycbcr_ch1_normalized.png} \\ \includegraphics[width=3.3cm]{image/017/ycbcr_ch1_normalized_hist.png}}\\
     \hline
-    %\includegraphics{image/original_asiatique.png} & \includegraphics{image/cannyAsiatique.png}\\
-    %\hline
-    %\includegraphics{image/original_black.png} & \includegraphics{image/cannyBlack.png}\\
-    %\hline
   \end{tabular}
   \caption{Comparatif des histogrammmes du canal Cb, selon les traitement.}
-\end{figure}
-
-Après normalisation, nous travaillons pour toutes les images, sur exactement la même plage de l'histogramme, 
-avec un niveau de gris minimum à 0 et un niveau maximum à 255.\\
-
-\begin{figure}[H]
-  \centering
-  \shortstack{\includegraphics[width=4cm]{image/008/ycbcr_ch1.png} \\ {\small Premier canal de chrominance}}
-  \shortstack{\includegraphics[width=4cm]{image/008/ycbcr_ch1_equalized.png} \\ {\small Canal égalisé}}
-  \shortstack{\includegraphics[width=4cm]{image/008/ycbcr_ch1_normalized.png} \\ {\small Canal normalisé}}
-  \caption{Différence entre égalisation et normalisation.}
 \end{figure}
 
 Ensuite, nous remarquons que les niveaux de gris correspondant aux yeux sont, dans tous nos tests, 
@@ -294,13 +281,6 @@ différencier les zones des yeux, sourcils et cheveux.
     \hline
   \end{tabular}
   \caption{Binarisation avec la méthode d'Otsu, sur différents exemples.}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=4cm]{image/008/ycbcr_inv_open.png}
-  \includegraphics[width=4cm]{image/008/ycbcr_bin_open.png}
-  \caption{À gauche, inversion des niveaux et ouverture de l'image. À droite, seuillage d'Otsu et ouverture de l'image.}
 \end{figure}
 
 \subsection{Sélection de composantes convexes avec des blobs}

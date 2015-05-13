@@ -44,12 +44,15 @@ sont décrites dans la liste suivante :\\
 Pour notre projet, nous travaillons dans la couche basse de la pyramide. Cette couche divise
 les images du flux vidéo en diverses régions d'intérêt telles que la région du visage, puis 
 des yeux.
+
 % fusion
-\subsection{Détection de visages : Viola et Jones}
+\subsection{Détection du visage et des yeux}
+
 L'application est divisée en deux parties. La première recherche le visage grâce à
 l'algorithme de Viola et Jones, et la seconde recherche les yeux dans la région délimitée
 précédemment.\\
 
+\subsubsection{Détection du visage}
 L'algorithme de Viola et Jones\cite{Viola04robustreal-time} est une méthode qui a été créée pour la détection de visages dans une 
 image. Cette méthode s'est par la suite généralisée à toutes sortes d'objets. L'algorithme nécessite une 
 base de connaissances composée des caractéristiques de l'objet recherché. Elle est utilisée dans un 
@@ -76,7 +79,7 @@ en oeuvre pour la détection des yeux faute de temps. De plus, la base de connai
 algorithme doit posséder des miliers d'exemples qu'il nous est impossible de rassembler. C'est pourquoi
 un autre algorithme a été utilisé pour la détection des yeux.
 
-\subsection{Détection des yeux}
+\subsubsection{Détection des yeux}
 Une fois que la région du visage est reconnue dans le flux vidéo, nous cherchons à détecter les yeux. 
 L'algorithme de détection des yeux déjà existant dans l'application permet une détection des yeux 
 robuste, mais assez peu précise. Cet algorithme se déroule en plusieurs étapes. D'abord, la région du visage 
