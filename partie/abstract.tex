@@ -2,26 +2,21 @@
 \addcontentsline{toc}{section}{Résumé}
 
 Il existe de plus en plus d'application qui requiert la détection et le traitement d'information
-présentent dans le visage. Dans le cadre de nos étude, nous participons à un projet visant
-à amélioré la normalistion d'un visage extrait d'une image. Pous cela, nous travaillons
-sur une application réalisé par l'équipe FOX qui détecte un visage à partir de l'algorithme de
-Viola et Jones, et qui effectue des traitements afin d'obtenir une image stable du visage
-quelque soit l'orientation ou la distance de la tête de l'utilisateur.\\
+dans le visage. Dans le cadre de nos étude, nous participons à un projet visant
+à améliorer la normalistion d'un visage extrait d'une image. Pous cela, nous travaillons
+sur une application réalisé par l'équipe FOX qui détecte un visage dans un flux vidéo. Le
+but est de le normaliser afin que celui-ci soit invariant quelque soit les mouvements de tête de l'utilisateur.\\
 
-% peut être parler de détection des yeux plutot que détection des contours
-Pour améliorer cette normalisation, nous effectuons des recherches sur les solutions possible
-pour détecter les contours d'une image. Pour effectuer cette normalisation, nous avons besoin
-de calculer des points fixes dans le visage. Nous allons pour cela calculer la position du
-centre de chaque oeil. Pour récupérer ces points plusieurs pistes sont envisageable, comme l'algorithme de
-Canny qui détecte les contours en analysant les variations de fréquences présentent dans l'image.
-Notre solution final utilise une image extraite d'un canal du modèle colorimétrique YCbCr, qui permet
-de s'abtraire de la luminosité de la vidéo et de la couleur de peau de l'utilisateur.\\
+Afin d'améliorer la solution développé par l'équipe nous devons affiner la localisation des yeux dans le flux vidéo.
+Pour cela nous nous appuyons sur la solution déjà existante pour récupérer une image de 
+la zone péri-oculaire de l'usager. A partir de cette image, nous cherchons une
+solution permettant d'obtenir des points plus proche du centre de l'oeil. Cela nous amene 
+à utiliser des algorithme de détection de contour et différent modèle colorimétrique.\\
 
-Après de nombreux traitements, sur la première chrominance du modèle YCbCr, nous obtenons plusieurs
-formes présentes dans une image binaire. Afin de déterminer quel est la forme représentant l'oeil,
-nous utilisons des blobs qui nous permettent de ne garder que les formes qui respectent les 
-conditions que nous spécifions. Nous obtenons ainsi la forme correspondant à l'oeil, ce qui nous permet 
-de calculer le centre de l'oeil avec le barycentre de cette forme.
+Nous sommes confronté à de nombreux problèmes comme la luminosité de l'image, la couleur de 
+peau de l'utilisateur ou encore les objets qui peuveut interférer dans nos traitements.
+Nous devons trouver une solution permettant de s'abstraire des conditions d'acquisition
+de la vidéo et ainsi que des contraintes de l'environnement.
 
 %\section*{Abstract}
 %\addcontentsline{toc}{section}{Abstract}

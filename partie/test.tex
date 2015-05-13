@@ -34,7 +34,7 @@ afin de mieux détecter les contours dans les zones que nous souhaitons.
 \subsubsection{Avec une moyenne de pixels sur des parties de l'image}
 
 % TODO segmenter une image c'est veut binariser ... mais pas découper 
-Plutôt que de prendre la moyenne des pixels sur l'ensemble de l'image de la zone péri-oculaire, nous segmentons l'image
+Plutôt que de prendre la moyenne des pixels sur l'ensemble de l'image de la zone péri-oculaire, nous divisons l'image
 en plusieurs zones dans lesquelles nous calculons la moyenne. Puis nous effectuons l'algorithme
 de Canny sur chacune de ces zones. Le résultat nous fournit bien une image dans laquelle l'oeil
 est détecté.
@@ -83,7 +83,24 @@ de chaque sous image.
 Grâce à ce procédé, nous obtenons une image sans la grille que nous avions précédemment. Cependant,
 le bruit dû aux ombres et aux rides ne permet pas encore d'effectuer des traitements pour localiser le centre de l'oeil.
 Nous avons un second problème qui est la couleur de peau de l'utilisateur. Nous avons appliqué notre méthode 
-sur des personnes ayant des couleurs de peau différentes et les résultats n'étaient pas exploitables (voir annexe 1 p\pageref{resultCanny}).\\ 
+sur des personnes ayant des couleurs de peau différentes et les résultats n'étaient pas exploitables.
+
+\appendices{Résultats du filtre de Canny sur des couleurs de peau différentes.}
+\begin{figure}[H]
+  \center
+  \begin{tabular}{|c|c|}
+    \hline
+    Image originale & Image après filtre de Canny\\
+    \hline
+    \includegraphics{image/original.png} & \includegraphics{image/canny_final.png}\\
+    \hline
+    \includegraphics{image/original_asiatique.png} & \includegraphics{image/cannyAsiatique.png}\\
+    \hline
+    \includegraphics{image/original_black.png} & \includegraphics{image/cannyBlack.png}\\
+    \hline
+  \end{tabular}
+  \caption{Résultats du filtre de Canny sur des personnes de couleur de peau différentes.}
+\end{figure}
 
 Afin de supprimer les bruits dûs aux ombres présentes dans l'image, nous décidons de travailler sur d'autres modèles
 colorimétriques comme le HSV\footnote{Hue Saturation Value} dont la composante \enquote{saturation} peut nous
@@ -197,9 +214,34 @@ l'image et le visage détecté. Nous préférons faire une normalisation de l'hi
 égalisation. En effet, l'égalisation répartit au mieux les niveaux de gris sur l'ensemble de 
 la plage de l'histogramme. Nous souhaitons conserver les modes et les niveaux plus sombres, or l'égalisation 
 a pour effet d'étaler les modes de l'histogramme et de rassembler les tons sombres et clairs. À l'inverse, 
-la normalisation répartit proportionnellement les niveaux de gris sur toute la plage (voir annexe 2 p\pageref{compHist}). Après 
-normalisation, nous travaillons pour toutes les images, sur exactement la même plage de l'histogramme, avec un niveau de 
-gris minimum à 0 et un niveau maximum à 255.\\
+la normalisation répartit proportionnellement les niveaux de gris sur toute la plage. 
+
+\begin{figure}[H]
+  \centering
+  \begin{tabular}{|c|c|c|c|}
+    \hline
+      Image RGB & Canal Cb de YCbCr & Canal Cb égalisé & Canal Cb normalisé \\
+    \hline
+      \shortstack{\includegraphics[width=3.3cm]{image/008/rgb_source.png}           \\ \includegraphics[width=3.3cm]{image/008/rgb_source_hist.png}} &
+      \shortstack{\includegraphics[width=3.3cm]{image/008/ycbcr_ch1.png}            \\ \includegraphics[width=3.3cm]{image/008/ycbcr_ch1_hist.png}} &
+      \shortstack{\includegraphics[width=3.3cm]{image/008/ycbcr_ch1_equalized.png}  \\ \includegraphics[width=3.3cm]{image/008/ycbcr_ch1_equalized_hist.png}} &
+      \shortstack{\includegraphics[width=3.3cm]{image/008/ycbcr_ch1_normalized.png} \\ \includegraphics[width=3.3cm]{image/008/ycbcr_ch1_normalized_hist.png}}\\
+    \hline
+      \shortstack{\includegraphics[width=3.3cm]{image/017/rgb_source.png}           \\ \includegraphics[width=3.3cm]{image/017/rgb_source_hist.png}} &
+      \shortstack{\includegraphics[width=3.3cm]{image/017/ycbcr_ch1.png}            \\ \includegraphics[width=3.3cm]{image/017/ycbcr_ch1_hist.png}} &
+      \shortstack{\includegraphics[width=3.3cm]{image/017/ycbcr_ch1_equalized.png}  \\ \includegraphics[width=3.3cm]{image/017/ycbcr_ch1_equalized_hist.png}} &
+      \shortstack{\includegraphics[width=3.3cm]{image/017/ycbcr_ch1_normalized.png} \\ \includegraphics[width=3.3cm]{image/017/ycbcr_ch1_normalized_hist.png}}\\
+    \hline
+    %\includegraphics{image/original_asiatique.png} & \includegraphics{image/cannyAsiatique.png}\\
+    %\hline
+    %\includegraphics{image/original_black.png} & \includegraphics{image/cannyBlack.png}\\
+    %\hline
+  \end{tabular}
+  \caption{Comparatif des histogrammmes du canal Cb, selon les traitement.}
+\end{figure}
+
+Après normalisation, nous travaillons pour toutes les images, sur exactement la même plage de l'histogramme, 
+avec un niveau de gris minimum à 0 et un niveau maximum à 255.\\
 
 \begin{figure}[H]
   \centering
@@ -210,8 +252,17 @@ gris minimum à 0 et un niveau maximum à 255.\\
 \end{figure}
 
 Ensuite, nous remarquons que les niveaux de gris correspondant aux yeux sont, dans tous nos tests, 
-compris entre 0 à 100 dans le canal Cb normalisé (voir annexe 3 p\pageref{grayDiff}). Par conséquent, nous appliquons 
-une LUT\footnote{Look Up Table} pour que les niveaux de gris étant de 0 à 100 sont normalisés de 
+compris entre 0 à 100 dans le canal Cb normalisé. 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=4cm]{image/008/normalized_info.png}
+  \includegraphics[width=4cm]{image/017/normalized_info.png}
+  \includegraphics[width=4cm]{image/ssm3/normalized_info.png}
+  \caption{Différents niveaux de gris dans le canal Cb}
+\end{figure}
+
+Par conséquent, nous appliquons une LUT\footnote{Look Up Table} pour que les niveaux de gris étant de 0 à 100 sont normalisés de 
 0 à 255.
 
 \begin{figure}[H]
@@ -227,7 +278,23 @@ l'image résultant de l'ouverture, avec la méthode d'Otsu\cite{OTSU_paper}. Cet
 permet de retrouver un seuil séparant l'histogramme en deux classes, dont la variance inter-classe est 
 minimisée. Ainsi, en appliquant le seuillage d'Otsu, nous conservons uniquement la classe de pixels la plus 
 claire. Enfin, nous effectuons une dernière ouverture morphologique, sur l'image binaire, pour bien 
-différencier les zones des yeux, sourcils et cheveux (voir annexe 4 p\pageref{binOtsu}).
+différencier les zones des yeux, sourcils et cheveux.
+
+\begin{figure}[H]
+  \centering
+  \begin{tabular}{|c|c|c|}
+    \hline
+     Image RGB & \shortstack{Inversion et ouverture de l'image, \\ après l'étape de la LUT}  & \shortstack{Binarisation avec la méthode \\ d'Otsu et ouverture de l'image} \\
+    \hline
+    \includegraphics[width=4cm]{image/008/rgb_source.png} & \includegraphics[width=4cm]{image/008/ycbcr_inv_open.png} & \includegraphics[width=4cm]{image/008/ycbcr_bin_open.png} \\
+    \hline
+    \includegraphics[width=4cm]{image/017/rgb_source.png} & \includegraphics[width=4cm]{image/017/ycbcr_inv_open.png} & \includegraphics[width=4cm]{image/017/ycbcr_bin_open.png} \\
+    \hline
+    \includegraphics[width=4cm]{image/ssm3/rgb_source.png} & \includegraphics[width=4cm]{image/ssm3/ycbcr_inv_open.png} & \includegraphics[width=4cm]{image/ssm3/ycbcr_bin_open.png} \\
+    \hline
+  \end{tabular}
+  \caption{Binarisation avec la méthode d'Otsu, sur différents exemples.}
+\end{figure}
 
 \begin{figure}[H]
   \centering
