@@ -18,14 +18,14 @@ de chaque oeil. Nous testons cet algorithme avec différents seuils afin de voir
 peut être intéressant dans notre situation. On voit sur les résultats que si le seuil est trop
 bas, l'oeil n'est pas détecté, et si le seuil est trop haut, les rides de la personne dans la vidéo
 apparaissent. Afin d'avoir un seuil adaptatif, nous prenons la valeur moyenne des pixels de l'image, ce
-qui nous donne un résultat où le sourcil apparait et où une partie de l'oeil est détectée.
+qui nous donne un résultat où le sourcil apparait et où une partie de l'oeil est détectée.\\
 
-\begin{figure}[H]
- \center
- \includegraphics[width=4cm]{image/original.png}
- \includegraphics[width=4cm]{image/canny_moyenne.png}
- \caption{Image de test et résultat de l'algorithme de Canny avec une moyenne des pixels}
-\end{figure}
+% \begin{figure}[H]
+%  \center
+%  \includegraphics[width=4cm]{image/original.png}
+%  \includegraphics[width=4cm]{image/canny_moyenne.png}
+%  \caption{Image de test et résultat de l'algorithme de Canny avec une moyenne des pixels}
+% \end{figure}
 
 On voit que cette méthode n'est pas optimale et supprime trop d'informations. De plus,
 l'algorithme prend en compte les ombres présentes dans l'image. Nous devons adapter cette méthode
@@ -42,8 +42,9 @@ est détecté.
 \begin{figure}[H]
  \center
  \includegraphics[width=4cm]{image/original.png}
+ \includegraphics[width=4cm]{image/canny_moyenne.png}
  \includegraphics[width=4cm]{image/canny_decomposition.png}
- \caption{Image de test et résultat de l'algorithme de Canny avec division de l'image en 16}
+ \caption{Image de test et résultat de l'algorithme de Canny sans puis avec division de l'image en 16}
 \end{figure}
 
 Avec cette méthode, nous obtenons une image bruitée avec les bords de chaque rectangle utilisé
