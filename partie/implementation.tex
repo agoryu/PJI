@@ -35,6 +35,20 @@ distance entre ces points et la vérité terrain.\\
 Pour avoir des éléments de comparaison, nous faisons la moyenne de ces deux distances pour une vidéo, et nous calculons
 le nombre de cas dans lesquels nos points sont plus efficaces.\\
 
+\begin{figure}[H]
+  \begin{tabular}{|c|c|c|c|}
+  \hline
+  vidéo & amélioration & écart moyen de la & écart moyen \\
+  & & première solution (en pixel) & de notre solution (en pixel)\\
+  \hline
+  homme blanc & 70\% & 72,6 & 70\\
+  \hline
+  femme asiatique & 62\% & 68 & 67\\
+  \hline
+  \end{tabular}
+  \caption{Tableau des résultat obtenu avec la nouvel solution}
+\end{figure}
+
 %Avec cette méthode, nous obtenons les résultats présents dans l'annexe p\pageref{resultatApplication}. 
 Nous pouvons voir que notre algorithme est plus efficace, en sachant que dans le cas ou il ne détecte pas de point, il se repose sur l'ancien
 calcul. De plus, nous avons pu constater que la condition que nous posons sur la sélection du blob peut poser problème 
