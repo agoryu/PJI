@@ -202,12 +202,12 @@ prenant un seuil qui semble correct à première vue pour la binarisation, nous 
 \end{figure}
 
 Il nous faut maintenant trouver les bons paramètres afin d'obtenir une image binaire qui nous permet d'extraire les 
-coordonnées de l'œil.
+coordonnées de l'oeil.
 
 \subsection{Binarisation de l'image}
 Nous souhaitons une image binaire à partir du premier canal de chrominance afin d'y appliquer les blobs. 
-Notre but est de retrouver la forme convexe qui correspond à celle de l'œil. Ainsi, le centroïde de cette 
-forme nous donne le centre de l'œil.\\
+Notre but est de retrouver la forme convexe qui correspond à celle de l'oeil. Ainsi, le centroïde de cette 
+forme nous donne le centre de l'oeil.\\
 
 Dans ce but, plusieurs étapes sont nécessaires. D'abord, nous normalisons l'histogramme afin d'utiliser 
 tous les niveaux de gris, cela nous permet de travailler sur l'ensemble de l'histogramme quels que soient
@@ -236,7 +236,7 @@ avec un niveau de gris minimum à 0 et un niveau maximum à 255.\\
       \shortstack{\includegraphics[width=3.3cm]{image/017/ycbcr_ch1_normalized.png} \\ \includegraphics[width=3.3cm]{image/017/ycbcr_ch1_normalized_hist.png}}\\
     \hline
   \end{tabular}
-  \caption{Comparatif des histogrammmes du canal Cb, selon les traitement.}
+  \caption{Comparatif des histogrammmes du canal Cb, selon les traitements.}
 \end{figure}
 \newpage
 Ensuite, nous remarquons que les niveaux de gris correspondant aux yeux sont, dans tous nos tests, 
@@ -250,7 +250,7 @@ compris entre 0 à 100 dans le canal Cb normalisé.
   \caption{Différents niveaux de gris dans le canal Cb}
 \end{figure}
 
-Par conséquent, nous appliquons une LUT\footnote{Look Up Table} pour que les niveaux de gris étant de 0 à 100 sont normalisés de 
+Par conséquent, nous appliquons une LUT\footnote{Look Up Table} pour que les niveaux de gris étant de 0 à 100 soient normalisés de 
 0 à 255.
 
 \begin{figure}[H]

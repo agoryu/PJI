@@ -4,15 +4,15 @@
 La partie sur laquelle nous travaillons est écrite en C++. Pour des raisons pratiques, le framework 
 QtCreator est utilisé, il facilite la création d'applications et d'interfaces graphiques. De même, 
 la bibliothèque OpenCV  est largement utilisée dans le projet, elle est open-source et dispose de 
-nombreux algorithmes dans le domaine de la vision par oridinateur. Ainsi, le développement de 
-l'application est plus rapide car les algorithmes tels que Viola etJones ou Canny sont déjà implémentés.
+nombreux algorithmes dans le domaine de la vision par ordinateur. Ainsi, le développement de 
+l'application est plus rapide car les algorithmes tels que Viola et Jones ou Canny sont déjà implémentés.
 
 \subsection{Architecture}
 L'application fournie est orientée objet et respecte le principe <<open-close>>. En effet, celle-ci est 
 découpée en Business Objects\footnote{Les Business Objects sont des objets métiers qui s'occupent de tâches 
 précises}, il est possible de créer et greffer nos propres objets métiers dans l'application. Les Business 
 Objects sont hiérarchisés dans une pyramide métier, où les objets métiers en haut de cette pyramide 
-sont les plus abstraits et utilisent les resultats de l'étage inférieur. Les objets métiers en bas de 
+sont les plus abstraits et utilisent les résultats de l'étage inférieur. Les objets métiers en bas de 
 la pyramide sont les plus proches du flux vidéo brut.\\
 
 \begin{figure}[H]
@@ -71,7 +71,7 @@ texture.\\
 \end{figure}
 
 Pour améliorer les perfomances de leur algorithme, Viola et Jones utilisent la méthode Adaboost. Son
-principe est de séléctionner les caractéristiques les plus performantes pour la détection de l'objet grâce à
+principe est de sélectionner les caractéristiques les plus performantes pour la détection de l'objet grâce à
 un calcul de probabilité utilisant l'entropie\footnote{valeur mesurant l'incertitude d'une donnée} des données.\\
 
 Cet algorithme est très efficace pour la détection de visage de l'application, mais nous ne pouvons le mettre
@@ -83,7 +83,7 @@ un autre algorithme a été utilisé pour la détection des yeux.
 Une fois que la région du visage est reconnue dans le flux vidéo, nous cherchons à détecter les yeux. 
 L'algorithme de détection des yeux déjà existant dans l'application permet une détection des yeux 
 robuste, mais assez peu précise. Cet algorithme se déroule en plusieurs étapes. D'abord, la région du visage 
-retrouvé par la méthode de Viola et Jones est égalisée. Ensuite, elle est scannée de bas en haut afin de
+retrouvée par la méthode de Viola et Jones est égalisée. Ensuite, elle est scannée de bas en haut afin de
 trouver les yeux avant les sourcils. Dans un même temps l'algorithme essaie de retrouver les yeux via la
 méthode Means Shift\footnote{technique d'analyse permettant de trouver les maxima dans une fonction de densité}.
 
