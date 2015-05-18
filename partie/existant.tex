@@ -5,7 +5,7 @@ La partie sur laquelle nous travaillons est écrite en C++. Pour des raisons pra
 QtCreator est utilisé, il facilite la création d'applications et d'interfaces graphiques. De même, 
 la bibliothèque OpenCV  est largement utilisée dans le projet, elle est open-source et dispose de 
 nombreux algorithmes dans le domaine de la vision par oridinateur. Ainsi, le développement de 
-l'application est plus rapide car les algorithmes tels que Viola etJones ou Canny sont déjà implémentés.\\
+l'application est plus rapide car les algorithmes tels que Viola etJones ou Canny sont déjà implémentés.
 
 \subsection{Architecture}
 L'application fournie est orientée objet et respecte le principe <<open-close>>. En effet, celle-ci est 
@@ -17,10 +17,10 @@ la pyramide sont les plus proches du flux vidéo brut.\\
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12.5cm]{image/pyramide.png}
+  \includegraphics[width=15cm]{image/pyramide.png}
   \caption{Processus d'extraction des informations pyramidales sur le flux vidéo}
 \end{figure}
-
+\newpage
 Les différentes couches de la pyramide disposent d'une classe métier abstraite. Ces classes 
 sont décrites dans la liste suivante :\\
 
@@ -50,7 +50,7 @@ des yeux.
 
 L'application est divisée en deux parties. La première recherche le visage grâce à
 l'algorithme de Viola et Jones, et la seconde recherche les yeux dans la région délimitée
-précédemment.\\
+précédemment.
 
 \subsubsection{Détection du visage}
 L'algorithme de Viola et Jones\cite{Viola04robustreal-time} est une méthode qui a été créée pour la détection de visages dans une 
@@ -85,7 +85,7 @@ L'algorithme de détection des yeux déjà existant dans l'application permet un
 robuste, mais assez peu précise. Cet algorithme se déroule en plusieurs étapes. D'abord, la région du visage 
 retrouvé par la méthode de Viola et Jones est égalisée. Ensuite, elle est scannée de bas en haut afin de
 trouver les yeux avant les sourcils. Dans un même temps l'algorithme essaie de retrouver les yeux via la
-méthode Means Shift\footnote{technique d'analyse permettant de trouver les maxima dans une fonction de densité}.\\
+méthode Means Shift\footnote{technique d'analyse permettant de trouver les maxima dans une fonction de densité}.
 
 
 
