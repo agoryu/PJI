@@ -26,10 +26,25 @@ n'arrive pas à calculer le centre de l'oeil, nous récupérons les coordonnées
 de l'équipe. Ainsi, dans le cas ou nous ne détectons aucun blob, nous obtenons tout de même un point, sauf si la méthode 
 précédente ne fonctionne pas non plus.
 
+\newpage
+
 \subsection{Comparaison des résultats obtenus avec les anciens résultats}
-Afin de valider nos travaux, nous avons pu tester nos points sur des vidéos comportant les points correspondant à
-la vérité terrain. Pour comparer les points de l'ancienne méthode avec les nôtres, nous calculons la
-distance entre ces points et la vérité terrain.\\
+Afin de valider nos travaux, nous pouvons tester notre solution sur des vidéos comportant les points correspondant à 
+la vérité terrain. Les vidéos de la base devel ne sont pas annotées, par conséquent nous devons annoter certaines de 
+ces vidéos, via un script qui nous permet de relever la vérité terrain image par image. Ensuite, pour comparer les points 
+de l'ancienne méthode avec les nôtres, nous calculons la distance entre ces points et la vérité terrain.\\
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=13cm]{image/visage_6points.png}
+  \caption{Trois pairs de points pour les yeux}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{image/eye_3points.png}
+  \caption{Illustration de la distance avec la vérité terrain}
+\end{figure}
 
 Pour avoir des éléments de comparaison, nous faisons la moyenne de ces deux distances pour une vidéo, et nous calculons
 le nombre de cas dans lesquels nos points sont plus efficaces. Dans la première vidéo nous obtenons 70\% de points plus précis, et
@@ -53,6 +68,8 @@ avec le sourcil de la personne quand le blob du sourcil et celui de l'oeil sont 
 Notre solution améliore donc légèrement la position du centre de l'oeil détecté par l'algorithme de l'équipe FOX. Certaines
 situations ne sont pas encore bien gérées dans l'application, mais nous avons pu étudier quelques solutions qui pourraient améliorer
 la localisation de l'oeil.
+
+\newpage
 
 \subsection{Améliorations envisageables}
 Tous les objectifs n'ont pas été remplis, car la recherche de solution pour l'optimisation du calcul du centre de l'oeil
