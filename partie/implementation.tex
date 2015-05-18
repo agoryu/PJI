@@ -27,13 +27,23 @@ de l'équipe. Ainsi, dans le cas ou nous ne détectons aucun blob, nous obtenons
 précédente ne fonctionne pas non plus.
 
 \subsection{Comparaison des résultats obtenus avec les anciens résultats}
-%TODO voir si on peut comparer les résultat sur les vieil vidéo
 Afin de valider nos travaux, nous avons pu tester nos points sur des vidéos comportant les points correspondant à
 la vérité terrain. Pour comparer les points de l'ancienne méthode avec les nôtres, nous calculons la
 distance entre ces points et la vérité terrain.\\
 
 Pour avoir des éléments de comparaison, nous faisons la moyenne de ces deux distances pour une vidéo, et nous calculons
-le nombre de cas dans lesquels nos points sont plus efficaces.\\
+le nombre de cas dans lesquels nos points sont plus efficaces. Dans la première vidéo nous obtenons 70\% de points plus précis, et
+60\% pour la second vidéo.\\
+
+\begin{figure}[H]
+  \includegraphics[width=17cm]{resultat/resultat_gauche.png}
+  \caption{Comparaison des résultats pour l'oeil gauche}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width=17cm]{resultat/resultat_droit.png}
+  \caption{Comparaison des résultats pour l'oeil droit}
+\end{figure}
 
 %Avec cette méthode, nous obtenons les résultats présents dans l'annexe p\pageref{resultatApplication}. 
 Nous pouvons voir que notre algorithme est plus efficace, en sachant que dans le cas ou il ne détecte pas de point, il se repose sur l'ancien
@@ -47,7 +57,7 @@ la localisation de l'oeil.
 \subsection{Améliorations envisageables}
 Tous les objectifs n'ont pas été remplis, car la recherche de solution pour l'optimisation du calcul du centre de l'oeil
 nous a pris beaucoup de temps à cause des pistes qui n'ont pas abouti. Notre point obtient de meilleurs résultats
-que celui utilisé précédement, mais il reste toujours un écart avec la vérité terrain. Il est donc encore possible
+que celui utilisé précédement, mais il reste toujours un écart avec la vérité terrain. \\Il est donc encore possible
 d'améliorer notre solution.\\
 
 Le second objectif sur la localisation de l'oeil lorsque celui-ci est fermé n'est pas abouti. Notre solution

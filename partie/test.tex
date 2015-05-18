@@ -18,14 +18,14 @@ de chaque oeil. Nous testons cet algorithme avec différents seuils afin de voir
 peut être intéressant dans notre situation. On voit sur les résultats que si le seuil est trop
 bas, l'oeil n'est pas détecté, et si le seuil est trop haut, les rides de la personne dans la vidéo
 apparaissent. Afin d'avoir un seuil adaptatif, nous prenons la valeur moyenne des pixels de l'image, ce
-qui nous donne un résultat où le sourcil apparait et où une partie de l'oeil est détectée.
+qui nous donne un résultat où le sourcil apparait et où une partie de l'oeil est détectée.\\
 
-\begin{figure}[H]
- \center
- \includegraphics[width=4cm]{image/original.png}
- \includegraphics[width=4cm]{image/canny_moyenne.png}
- \caption{Image de test et résultat de l'algorithme de Canny avec une moyenne des pixels}
-\end{figure}
+% \begin{figure}[H]
+%  \center
+%  \includegraphics[width=4cm]{image/original.png}
+%  \includegraphics[width=4cm]{image/canny_moyenne.png}
+%  \caption{Image de test et résultat de l'algorithme de Canny avec une moyenne des pixels}
+% \end{figure}
 
 On voit que cette méthode n'est pas optimale et supprime trop d'informations. De plus,
 l'algorithme prend en compte les ombres présentes dans l'image. Nous devons adapter cette méthode
@@ -42,8 +42,9 @@ est détecté.
 \begin{figure}[H]
  \center
  \includegraphics[width=4cm]{image/original.png}
+ \includegraphics[width=4cm]{image/canny_moyenne.png}
  \includegraphics[width=4cm]{image/canny_decomposition.png}
- \caption{Image de test et résultat de l'algorithme de Canny avec division de l'image en 16}
+ \caption{Image de test et résultat de l'algorithme de Canny sans puis avec division de l'image en 16}
 \end{figure}
 
 Avec cette méthode, nous obtenons une image bruitée avec les bords de chaque rectangle utilisé
@@ -237,7 +238,7 @@ avec un niveau de gris minimum à 0 et un niveau maximum à 255.\\
   \end{tabular}
   \caption{Comparatif des histogrammmes du canal Cb, selon les traitement.}
 \end{figure}
-
+\newpage
 Ensuite, nous remarquons que les niveaux de gris correspondant aux yeux sont, dans tous nos tests, 
 compris entre 0 à 100 dans le canal Cb normalisé. 
 
@@ -301,6 +302,14 @@ Dans notre cas nous avons posé les conditions suivantes :
  \item S'il y a plusieurs blobs alors l'oeil devrait être celui qui est le plus proche du centre, étant
  donné que la ROI doit être centré sur l'oeil.
 \end{itemize}
-Ces conditions nous permettent de supprimer les éléments perturbateurs qui étaient présents dans l'image binaire.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=6cm]{image/ycbcr_bin_open_blob.png}
+  \caption{Image avec les blobs détectés par notre solution.}
+\end{figure}
+
+Sur cet exemple, le blob qui sera retenu comme étant le blob de l'oeil, est le numéro 1, car c'est lui
+qui est le plus au centre de la ROI. Ces conditions nous permettent de supprimer les éléments perturbateurs qui étaient présents dans l'image binaire.
 Nous obtenons donc une forme représentant l'oeil, il suffit maintenant de calculer le centre de cette forme
 pour obtenir la localisation du centre de l'oeil. Pour cela nous utilisons le calcul du barycentre.
